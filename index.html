@@ -16,6 +16,13 @@
     --smoke: #e8e8e8;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+  /* offset anchor targets so the sticky nav doesn't cover them */
+  #products, #merch, #science, #testimonials, #promo, #about {
+    scroll-margin-top: 80px;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {

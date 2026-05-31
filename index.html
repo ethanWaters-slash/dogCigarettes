@@ -642,11 +642,25 @@
     padding: 12px 30px;
     box-shadow: 0 2px 20px rgba(0,0,0,0.3);
   }
-  .nav-logo {
+.nav-logo {
     font-family: 'Permanent Marker', cursive;
-    color: var(--yellow);
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.35);
+    transition: transform 0.15s;
+  }
+  .nav-logo:hover { transform: rotate(-2deg) scale(1.03); }
+  .nav-logo-dog { color: #fff; }
+  .nav-logo-cig { color: var(--yellow); }
+  .nav-logo-tm {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    color: var(--yellow);
+    align-self: flex-start;
+    margin-left: 1px;
   }
   .nav-links {
     display: flex;
@@ -1190,7 +1204,7 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">🐾 Dog Cigarettes™</a>
+  <a class="nav-logo" href="#">🐾 <span class="nav-logo-dog">Dog</span><span class="nav-logo-cig">Cigarettes</span><span class="nav-logo-tm">™</span></a>
   <ul class="nav-links">
     <li><a href="#products">Products</a></li>
     <li><a href="#merch">Merch</a></li>

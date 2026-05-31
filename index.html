@@ -261,6 +261,120 @@
   .product-price s { font-size: 1rem; color: #999; margin-right: 6px; }
   .product-flavors { font-size: 0.7rem; color: #999; margin-top: 6px; }
 
+  /* ── MERCH SECTION ── */
+  .merch { background: var(--tan); position: relative; overflow: hidden; }
+  .merch::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.06) 40px,
+      rgba(255,255,255,0.06) 80px
+    );
+    pointer-events: none;
+  }
+  .merch .section-label { color: var(--brown); }
+  .merch .section-title { color: var(--brown); }
+  .merch .container { position: relative; z-index: 1; }
+  .merch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+  .merch-card {
+    background: white;
+    border-radius: 16px;
+    padding: 0 0 22px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .merch-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 44px rgba(0,0,0,0.18);
+  }
+  .merch-visual {
+    font-size: 5rem;
+    line-height: 1;
+    padding: 36px 0 24px;
+    background: var(--cream);
+    position: relative;
+  }
+  .merch-tag {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: var(--red);
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    font-size: 0.65rem;
+    padding: 3px 12px;
+    border-radius: 100px;
+  }
+  .merch-tag.gold { background: var(--yellow); color: var(--brown); }
+  .merch-body { padding: 18px 18px 0; flex: 1; display: flex; flex-direction: column; }
+  .merch-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.35rem;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    color: var(--dark);
+  }
+  .merch-desc { font-size: 0.8rem; color: #666; line-height: 1.5; margin-bottom: 14px; flex: 1; }
+  .merch-price {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.6rem;
+    color: var(--brown);
+    margin-bottom: 12px;
+  }
+  .merch-price s { font-size: 0.9rem; color: #999; margin-right: 6px; }
+  /* option selector (sizes / colors) */
+  .merch-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .merch-opt {
+    border: 1.5px solid #ddd;
+    background: white;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: #555;
+    font-family: 'Nunito', sans-serif;
+  }
+  .merch-opt.selected {
+    border-color: var(--brown);
+    background: var(--brown);
+    color: white;
+  }
+  .merch-buy {
+    background: var(--yellow);
+    color: var(--brown);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    padding: 11px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin: 0 18px;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .merch-buy:hover { transform: translateY(-2px); }
+  .merch-buy:active { transform: translateY(1px); }
+
   /* ── SCIENCE SECTION ── */
   .science { background: var(--cream); }
   .science-grid {
@@ -558,7 +672,250 @@
     border: none;
     cursor: pointer;
     font-size: 0.9rem;
+    position: relative;
   }
+
+  /* ── CART DRAWER ── */
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: auto; }
+  .cart-drawer {
+    position: fixed;
+    top: 0; right: 0;
+    height: 100%;
+    width: 420px;
+    max-width: 90vw;
+    background: var(--cream);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+    display: flex;
+    flex-direction: column;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.25);
+  }
+  .cart-drawer.open { transform: translateX(0); }
+  .cart-header {
+    background: var(--brown);
+    color: white;
+    padding: 22px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cart-header h3 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.5rem;
+  }
+  .cart-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+  }
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+  }
+  .cart-empty {
+    text-align: center;
+    color: #999;
+    padding: 60px 20px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .cart-empty .big { font-size: 3rem; display: block; margin-bottom: 12px; }
+  .cart-item {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .cart-item-emoji {
+    font-size: 2.2rem;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--cream);
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .cart-item-info { flex: 1; min-width: 0; }
+  .cart-item-name {
+    font-weight: 900;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    margin-bottom: 2px;
+  }
+  .cart-item-variant { font-size: 0.68rem; color: #999; margin-bottom: 4px; }
+  .cart-item-price { font-size: 0.8rem; color: var(--brown); font-weight: 700; }
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .qty-btn {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    border: 1.5px solid #ddd;
+    background: white;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brown);
+    font-weight: 700;
+  }
+  .qty-btn:hover { border-color: var(--brown); }
+  .qty-num { font-size: 0.85rem; font-weight: 700; min-width: 20px; text-align: center; }
+  .cart-item-remove {
+    background: none;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 1.1rem;
+    align-self: flex-start;
+    transition: color 0.15s;
+  }
+  .cart-item-remove:hover { color: var(--red); }
+  .cart-footer {
+    border-top: 1px solid #e5ddd0;
+    padding: 20px 24px;
+    background: var(--cream);
+  }
+  .cart-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  .cart-row.total {
+    font-size: 1.2rem;
+    color: var(--dark);
+    font-weight: 900;
+    border-top: 1px dashed #ccc;
+    padding-top: 10px;
+    margin-top: 6px;
+  }
+  .cart-row.total .amt { font-family: 'Permanent Marker', cursive; color: var(--brown); }
+  .checkout-btn {
+    width: 100%;
+    background: var(--yellow);
+    color: var(--brown);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 14px;
+    box-shadow: 0 5px 0 #b8960a;
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #b8960a; }
+  .checkout-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #b8960a; }
+  .checkout-btn:disabled {
+    background: #ccc;
+    color: #888;
+    box-shadow: 0 5px 0 #aaa;
+    cursor: not-allowed;
+  }
+  .cart-fine { font-size: 0.6rem; color: #bbb; text-align: center; margin-top: 10px; line-height: 1.4; }
+
+  /* ── OUT OF STOCK MODAL ── */
+  .oos-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,26,0.85);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .oos-overlay.open { opacity: 1; pointer-events: auto; }
+  .oos-modal {
+    background: var(--cream);
+    border-radius: 20px;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    overflow: hidden;
+    transform: scale(0.85) translateY(20px);
+    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  .oos-overlay.open .oos-modal { transform: scale(1) translateY(0); }
+  .oos-top {
+    background: var(--red);
+    color: white;
+    padding: 32px 24px 26px;
+    position: relative;
+    overflow: hidden;
+  }
+  .oos-top::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.06) 18px, rgba(255,255,255,0.06) 36px);
+  }
+  .oos-emoji { font-size: 4rem; line-height: 1; position: relative; animation: shake 0.6s ease-in-out; }
+  @keyframes shake {
+    0%,100% { transform: rotate(0); }
+    20% { transform: rotate(-12deg); }
+    40% { transform: rotate(10deg); }
+    60% { transform: rotate(-6deg); }
+    80% { transform: rotate(4deg); }
+  }
+  .oos-top h2 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2rem;
+    margin-top: 10px;
+    position: relative;
+  }
+  .oos-body { padding: 26px 28px 30px; }
+  .oos-body p { font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 14px; }
+  .oos-body .lead { font-size: 1.05rem; color: var(--dark); font-weight: 700; }
+  .oos-fine { font-size: 0.62rem; color: #aaa; line-height: 1.5; margin-top: 4px; }
+  .oos-btn {
+    background: var(--brown);
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    padding: 13px 36px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.1s;
+  }
+  .oos-btn:hover { transform: translateY(-2px); }
+  .oos-btn:active { transform: translateY(1px); }
 
   /* ── AWARD BANNER ── */
   .awards {
@@ -592,6 +949,7 @@
     .stats-bar { flex-direction: column; align-items: center; gap: 16px; padding: 24px 16px; }
     .stat-item { min-width: unset; width: 100%; }
     .product-grid { grid-template-columns: 1fr; gap: 20px; }
+    .merch-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .science-grid { grid-template-columns: 1fr; }
     .testi-grid { grid-template-columns: 1fr; }
     .promo-grid { grid-template-columns: 1fr; }
@@ -615,6 +973,7 @@
     .hero h1 { font-size: clamp(2.2rem, 16vw, 4rem); }
     .ticker-inner { font-size: 0.9rem; }
     .stat-number { font-size: 2.2rem; }
+    .merch-grid { grid-template-columns: 1fr; }
   }
 
   /* ── DOG LINEUP SECTION ── */
@@ -834,11 +1193,12 @@
   <a class="nav-logo" href="#">🐾 Dog Cigarettes™</a>
   <ul class="nav-links">
     <li><a href="#products">Products</a></li>
+    <li><a href="#merch">Merch</a></li>
     <li><a href="#science">Science</a></li>
     <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#promo">Deals</a></li>
   </ul>
-  <button class="nav-cart" onclick="cartClick()">🛒 CART (0)</button>
+  <button class="nav-cart" onclick="openCart()">🛒 CART (<span id="cartCount">0</span>)</button>
 </nav>
 
 <!-- HERO -->
@@ -949,7 +1309,7 @@
       <div class="product-price"><s>$49</s> $12.99</div>
       <div class="product-flavors">Available in: Plain, Slightly Less Plain, and "Artisan"</div>
       <br>
-      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addCart(this)">ADD TO CART</button>
+      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addToCart('Classic Barkboro™', 12.99, '🐶')">ADD TO CART</button>
     </div>
     <div class="product-card featured">
       <div class="badge gold">🔥 DOG'S CHOICE AWARD™</div>
@@ -959,7 +1319,7 @@
       <div class="product-price"><s>$200</s> $34.99</div>
       <div class="product-flavors">Flavors: Gold Foil, Truffle (conceptually), Goodness</div>
       <br>
-      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addCart(this)">ADD TO CART</button>
+      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addToCart('Platinum Pawboro™', 34.99, '🦴')">ADD TO CART</button>
     </div>
     <div class="product-card">
       <div class="badge">WELLNESS</div>
@@ -969,7 +1329,7 @@
       <div class="product-price"><s>$80</s> $19.99</div>
       <div class="product-flavors">Infused with: Kale (smell only), Quinoa (vibes), Good Intentions</div>
       <br>
-      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addCart(this)">ADD TO CART</button>
+      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addToCart('Organic Woofboro™', 19.99, '🌿')">ADD TO CART</button>
     </div>
     <div class="product-card">
       <div class="badge">LIMITED</div>
@@ -979,9 +1339,118 @@
       <div class="product-price">$499.99</div>
       <div class="product-flavors">1 remaining!</div>
       <br>
-      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addCart(this)">ADD TO CART</button>
+      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addToCart('Diamond Snout™', 499.99, '💎')">ADD TO CART</button>
     </div>
   </div>
+</div>
+</section>
+
+<!-- MERCH -->
+<section class="merch" id="merch">
+<div class="container">
+  <p class="section-label">WEAR YOUR QUESTIONABLE LIFE CHOICES</p>
+  <h2 class="section-title">Official Dog Cigarettes™ Merch 🧢</h2>
+  <p style="text-align:center; max-width:560px; margin:0 auto 36px; color:var(--brown); font-size:0.9rem; line-height:1.6;">
+    Now you can advertise this brand to confused strangers in real life. All merch is for humans —
+    Nami refuses to wear clothing and has made that very clear.
+  </p>
+  <div class="merch-grid">
+
+    <div class="merch-card" data-merch="tshirt">
+      <div class="merch-visual">👕<span class="merch-tag gold">BESTSELLER</span></div>
+      <div class="merch-body">
+        <div class="merch-name">"A Dog's Best Friend" Tee</div>
+        <div class="merch-desc">Soft cotton tee with Nami's disappointed face screen-printed over the slogan. People will ask. You won't be able to explain.</div>
+        <div class="merch-price"><s>$40</s> $24.99</div>
+        <div class="merch-options" data-group="size">
+          <button class="merch-opt selected" onclick="selectOption(this)">S</button>
+          <button class="merch-opt" onclick="selectOption(this)">M</button>
+          <button class="merch-opt" onclick="selectOption(this)">L</button>
+          <button class="merch-opt" onclick="selectOption(this)">XL</button>
+        </div>
+      </div>
+      <button class="merch-buy" onclick="addMerch(this, 'Best Friend Tee', 24.99, '👕')">ADD TO CART</button>
+    </div>
+
+    <div class="merch-card" data-merch="hat">
+      <div class="merch-visual">🧢<span class="merch-tag">NEW</span></div>
+      <div class="merch-body">
+        <div class="merch-name">Smokin' Snout Dad Hat</div>
+        <div class="merch-desc">Embroidered paw-holding-a-cigarette logo. Adjustable strap fits all heads, including unusually confident ones.</div>
+        <div class="merch-price">$22.99</div>
+        <div class="merch-options" data-group="color">
+          <button class="merch-opt selected" onclick="selectOption(this)">Brown</button>
+          <button class="merch-opt" onclick="selectOption(this)">Cream</button>
+          <button class="merch-opt" onclick="selectOption(this)">Yellow</button>
+        </div>
+      </div>
+      <button class="merch-buy" onclick="addMerch(this, 'Smokin Snout Dad Hat', 22.99, '🧢')">ADD TO CART</button>
+    </div>
+
+    <div class="merch-card" data-merch="sticker">
+      <div class="merch-visual">🏷️<span class="merch-tag gold">$ STEAL</span></div>
+      <div class="merch-body">
+        <div class="merch-name">Sticker Pack (6)</div>
+        <div class="merch-desc">Six weatherproof vinyl stickers featuring Nami, Gerald, and four logos legal counsel told us not to describe.</div>
+        <div class="merch-price"><s>$12</s> $6.99</div>
+        <div class="merch-options" data-group="finish">
+          <button class="merch-opt selected" onclick="selectOption(this)">Glossy</button>
+          <button class="merch-opt" onclick="selectOption(this)">Matte</button>
+          <button class="merch-opt" onclick="selectOption(this)">Holographic</button>
+        </div>
+      </div>
+      <button class="merch-buy" onclick="addMerch(this, 'Sticker Pack (6)', 6.99, '🏷️')">ADD TO CART</button>
+    </div>
+
+    <div class="merch-card" data-merch="hoodie">
+      <div class="merch-visual">🧥<span class="merch-tag">COZY</span></div>
+      <div class="merch-body">
+        <div class="merch-name">Pack-A-Day Hoodie</div>
+        <div class="merch-desc">Heavyweight fleece hoodie. Big front pocket — perfect for treats, hands, or a small confused dog who won't fit.</div>
+        <div class="merch-price"><s>$70</s> $49.99</div>
+        <div class="merch-options" data-group="size">
+          <button class="merch-opt selected" onclick="selectOption(this)">S</button>
+          <button class="merch-opt" onclick="selectOption(this)">M</button>
+          <button class="merch-opt" onclick="selectOption(this)">L</button>
+          <button class="merch-opt" onclick="selectOption(this)">XL</button>
+        </div>
+      </div>
+      <button class="merch-buy" onclick="addMerch(this, 'Pack-A-Day Hoodie', 49.99, '🧥')">ADD TO CART</button>
+    </div>
+
+    <div class="merch-card" data-merch="mug">
+      <div class="merch-visual">☕<span class="merch-tag">FRAGILE</span></div>
+      <div class="merch-body">
+        <div class="merch-name">"I Heart My Dog's Habit" Mug</div>
+        <div class="merch-desc">11oz ceramic mug. Dishwasher safe, morally questionable. Holds coffee, tea, or quiet contemplation of your choices.</div>
+        <div class="merch-price">$15.99</div>
+        <div class="merch-options" data-group="style">
+          <button class="merch-opt selected" onclick="selectOption(this)">Classic</button>
+          <button class="merch-opt" onclick="selectOption(this)">Color-Change</button>
+        </div>
+      </div>
+      <button class="merch-buy" onclick="addMerch(this, 'Dogs Habit Mug', 15.99, '☕')">ADD TO CART</button>
+    </div>
+
+    <div class="merch-card" data-merch="tote">
+      <div class="merch-visual">👜<span class="merch-tag gold">ECO</span></div>
+      <div class="merch-body">
+        <div class="merch-name">Canvas Tote of Shame</div>
+        <div class="merch-desc">Carry your groceries and your reputation. Reads "I Buy Cigarettes For My Dog" in tasteful serif. Reusable, like the guilt.</div>
+        <div class="merch-price">$18.99</div>
+        <div class="merch-options" data-group="color">
+          <button class="merch-opt selected" onclick="selectOption(this)">Natural</button>
+          <button class="merch-opt" onclick="selectOption(this)">Black</button>
+        </div>
+      </div>
+      <button class="merch-buy" onclick="addMerch(this, 'Canvas Tote of Shame', 18.99, '👜')">ADD TO CART</button>
+    </div>
+
+  </div>
+  <p style="text-align:center; font-size:0.62rem; color:var(--brown); opacity:0.55; margin-top:28px; max-width:600px; margin-left:auto; margin-right:auto; line-height:1.5;">
+    All merch designs are original and were made in an afternoon. Sizes run "approximately." Colors may differ
+    from screen, reality, and one another. Nami is not legally a model and was not compensated. Gerald demanded royalties.
+  </p>
 </div>
 </section>
 
@@ -1229,6 +1698,10 @@
       <div class="faq-a">Cigarettes</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Is anything actually in stock? <span class="arrow">▼</span></div>
+      <div class="faq-a">Great question. No. Everything is perpetually out of stock the moment you try to pay. This is not a bug. This is the entire business model. We are, technically, a museum.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Do vets recommend this? <span class="arrow">▼</span></div>
       <div class="faq-a">Zero vets recommend this. We tried. Dr. Linda Farrow (see testimonials) was the closest we got and she sent a cease and desist. We are proud to be transparent about this. Zero vet recommendations is, we believe, a form of honesty that sets us apart in the market. Most products claim endorsements they don't have. We loudly confirm we have none.</div>
     </div>
@@ -1274,25 +1747,191 @@
   </p>
 </footer>
 
+<!-- ── CART DRAWER ── -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+  <div class="cart-header">
+    <h3>🛒 Your Cart</h3>
+    <button class="cart-close" onclick="closeCart()" aria-label="Close cart">×</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <!-- items injected here -->
+  </div>
+  <div class="cart-footer">
+    <div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
+    <div class="cart-row"><span>Shipping</span><span id="cartShipping">Calculated at checkout*</span></div>
+    <div class="cart-row total"><span>Total</span><span class="amt" id="cartTotal">$0.00</span></div>
+    <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" disabled>PROCEED TO CHECKOUT</button>
+    <p class="cart-fine">*Shipping is free on orders over $9,999. You are almost there, probably.</p>
+  </div>
+</aside>
+
+<!-- ── OUT OF STOCK MODAL ── -->
+<div class="oos-overlay" id="oosOverlay">
+  <div class="oos-modal" role="dialog" aria-modal="true" aria-labelledby="oosTitle">
+    <div class="oos-top">
+      <div class="oos-emoji">🚫🐶</div>
+      <h2 id="oosTitle">Out of Stock!</h2>
+    </div>
+    <div class="oos-body">
+      <p class="lead">We are so sorry. Every single item is, was, and forever shall be out of stock.</p>
+      <p>You did everything right. You added items to your cart. You believed in us. But the moment you reached for your wallet, the universe intervened — as it always does, at exactly this step.</p>
+      <p>Your cart has been lovingly preserved. Nami has been notified. She remains unbothered.</p>
+      <button class="oos-btn" onclick="closeOos()">FINE. I UNDERSTAND.</button>
+      <p class="oos-fine">No payment was taken because no payment system exists. This was never going to work. We warned you in the FAQ.</p>
+    </div>
+  </div>
+</div>
+
 <script>
-  // ── CART ──
-  let cartCount = 0;
-  function addCart(btn) {
-    cartCount++;
-    document.querySelector('.nav-cart').textContent = `🛒 CART (${cartCount})`;
+  // ── CART STATE ──
+  // Each line item: { id, name, price, emoji, variant, qty }
+  let cart = [];
+
+  function lineId(name, variant) {
+    return name + '||' + (variant || '');
+  }
+
+  function addToCart(name, price, emoji, variant) {
+    const id = lineId(name, variant);
+    const existing = cart.find(i => i.id === id);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ id, name, price, emoji, variant: variant || '', qty: 1 });
+    }
+    renderCart();
+    flashCartButton();
+  }
+
+  // Merch add — reads the currently selected option from the card
+  function addMerch(btn, name, price, emoji) {
+    const card = btn.closest('.merch-card');
+    const group = card.querySelector('.merch-options');
+    let variant = '';
+    if (group) {
+      const sel = group.querySelector('.merch-opt.selected');
+      const label = group.dataset.group || 'option';
+      if (sel) variant = label.charAt(0).toUpperCase() + label.slice(1) + ': ' + sel.textContent;
+    }
+    addToCart(name, price, emoji, variant);
+    const original = btn.textContent;
     btn.textContent = '✓ ADDED!';
     btn.style.background = '#27ae60';
-    setTimeout(() => {
-      btn.textContent = 'ADD TO CART';
-      btn.style.background = '';
-    }, 1500);
-    if (cartCount === 3) alert("You've added 3 products to your cart. Nami would be proud. Nami does not understand commerce.");
-    if (cartCount === 5) alert("5 items! Our therapist says this might be compensatory behavior. We're not saying that to stop you. We're saying it because we care.");
+    btn.style.color = 'white';
+    setTimeout(() => { btn.textContent = original; btn.style.background = ''; btn.style.color = ''; }, 1300);
   }
-  function cartClick() {
-    if (cartCount === 0) alert("Your cart is empty! Your dog is judging you.");
-    else alert(`You have ${cartCount} item(s) in your cart! Checkout is under construction. Like most of our operations.`);
+
+  function selectOption(btn) {
+    const group = btn.parentElement;
+    group.querySelectorAll('.merch-opt').forEach(o => o.classList.remove('selected'));
+    btn.classList.add('selected');
   }
+
+  function changeQty(id, delta) {
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+    renderCart();
+  }
+
+  function removeItem(id) {
+    cart = cart.filter(i => i.id !== id);
+    renderCart();
+  }
+
+  function cartItemCount() {
+    return cart.reduce((sum, i) => sum + i.qty, 0);
+  }
+
+  function renderCart() {
+    // count badge
+    document.getElementById('cartCount').textContent = cartItemCount();
+
+    const container = document.getElementById('cartItems');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    if (cart.length === 0) {
+      container.innerHTML = `
+        <div class="cart-empty">
+          <span class="big">🦴</span>
+          Your cart is empty.<br>
+          Nami is silently judging you.<br>
+          <span style="font-size:0.8rem; color:#bbb;">(She judges everyone. Don't take it personally.)</span>
+        </div>`;
+      checkoutBtn.disabled = true;
+    } else {
+      container.innerHTML = cart.map(i => `
+        <div class="cart-item">
+          <div class="cart-item-emoji">${i.emoji}</div>
+          <div class="cart-item-info">
+            <div class="cart-item-name">${i.name}</div>
+            ${i.variant ? `<div class="cart-item-variant">${i.variant}</div>` : ''}
+            <div class="cart-item-price">$${i.price.toFixed(2)} each</div>
+            <div class="qty-control">
+              <button class="qty-btn" onclick="changeQty('${i.id.replace(/'/g, "\\'")}', -1)">−</button>
+              <span class="qty-num">${i.qty}</span>
+              <button class="qty-btn" onclick="changeQty('${i.id.replace(/'/g, "\\'")}', 1)">+</button>
+            </div>
+          </div>
+          <button class="cart-item-remove" onclick="removeItem('${i.id.replace(/'/g, "\\'")}')" aria-label="Remove">🗑️</button>
+        </div>
+      `).join('');
+      checkoutBtn.disabled = false;
+    }
+
+    const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    document.getElementById('cartSubtotal').textContent = '$' + subtotal.toFixed(2);
+    document.getElementById('cartTotal').textContent = '$' + subtotal.toFixed(2);
+  }
+
+  function flashCartButton() {
+    const btn = document.querySelector('.nav-cart');
+    btn.style.transition = 'transform 0.15s';
+    btn.style.transform = 'scale(1.15)';
+    setTimeout(() => { btn.style.transform = 'scale(1)'; }, 150);
+  }
+
+  // ── CART DRAWER OPEN/CLOSE ──
+  function openCart() {
+    renderCart();
+    document.getElementById('cartOverlay').classList.add('open');
+    document.getElementById('cartDrawer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCart() {
+    document.getElementById('cartOverlay').classList.remove('open');
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── CHECKOUT → OUT OF STOCK ──
+  function checkout() {
+    if (cart.length === 0) return;
+    closeCart();
+    setTimeout(openOos, 300);
+  }
+  function openOos() {
+    document.getElementById('oosOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeOos() {
+    document.getElementById('oosOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close OOS modal when clicking the dimmed backdrop
+  document.getElementById('oosOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeOos();
+  });
+  // Esc closes whatever is open
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      if (document.getElementById('oosOverlay').classList.contains('open')) closeOos();
+      else if (document.getElementById('cartDrawer').classList.contains('open')) closeCart();
+    }
+  });
 
   // ── COUNTER ANIMATION ──
   function animateCounter(el, target, suffix='', duration=1800) {
@@ -1356,6 +1995,9 @@
     alert(`Thank you for subscribing, ${email}! Nami has been informed. She wagged her tail. We're choosing to interpret that as enthusiasm.`);
     document.getElementById('emailInput').value = '';
   }
+
+  // initial render
+  renderCart();
 </script>
 </body>
 </html>

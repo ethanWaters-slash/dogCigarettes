@@ -2029,6 +2029,39 @@
     renderCart();
     flashCartButton();
   }
+  function submitContact() {
+  const name = document.getElementById('contactName').value.trim();
+  const email = document.getElementById('contactEmail').value.trim();
+  const reason = document.getElementById('contactReason').value;
+  const message = document.getElementById('contactMessage').value.trim();
+  const dogName = document.getElementById('contactDogName').value.trim();
+
+  if (!name) { alert("We need a name. Or your dog's name. Any name. We're not picky."); return; }
+  if (!email || !email.includes('@')) { alert("Please enter a valid email. We can't reply to nothing. We tried once. It didn't work."); return; }
+  if (!reason) { alert("Please select a reason. We like to be emotionally prepared."); return; }
+  if (!message) { alert("You opened the form and left the message blank. That's very mysterious. Please write something."); return; }
+
+  const reasonLabels = {
+    ethan: "The co-founder (Ethan) is kinda cute...",
+    nami: "Question specifically about Nami",
+    order: "Question about my order",
+    press: "Press / media inquiry",
+    legal: "Legal matter (cease & desist)",
+    vet: "I am a vet and I am upset",
+    collab: "Collaboration / partnership",
+    existential: "Existential concern about this product",
+    other: "Other"
+  };
+
+  const dogLine = dogName ? `\nMy dog's name: ${dogName}` : '';
+
+  const subject = encodeURIComponent(`[Dog Cigarettes™] ${reasonLabels[reason] || 'Contact Form'}`);
+  const body = encodeURIComponent(
+    `From: ${name} (${email})\nReason: ${reasonLabels[reason]}\n${dogLine}\n\n${message}`
+  );
+
+  window.location.href = `mailto:nami@dogcigarettes.com?subject=${subject}&body=${body}`;
+}
 
   // Merch add — reads the currently selected option from the card
   function addMerch(btn, name, price, emoji) {

@@ -584,7 +584,116 @@
   }
   .faq-item.open .faq-a { max-height: 200px; padding-top: 12px; }
   .faq-item.open .arrow { transform: rotate(180deg); }
-
+/* ── CONTACT ── */
+  .contact { background: white; }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+  .contact-info-block { display: flex; flex-direction: column; gap: 20px; }
+  .contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 18px 20px;
+    border-left: 4px solid var(--brown);
+  }
+  .contact-info-icon { font-size: 1.8rem; flex-shrink: 0; margin-top: 2px; }
+  .contact-info-label {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    color: var(--brown);
+    margin-bottom: 4px;
+  }
+  .contact-info-value {
+    font-size: 0.9rem;
+    color: var(--dark);
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .contact-info-caveat {
+    font-size: 0.65rem;
+    color: #aaa;
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .contact-form-wrap { display: flex; flex-direction: column; gap: 14px; }
+  .contact-field-group { display: flex; flex-direction: column; gap: 6px; }
+  .contact-field-group label {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    color: #888;
+  }
+  .contact-field-group input,
+  .contact-field-group select,
+  .contact-field-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    color: var(--dark);
+    background: white;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+  .contact-field-group input:focus,
+  .contact-field-group select:focus,
+  .contact-field-group textarea:focus {
+    outline: none;
+    border-color: var(--brown);
+  }
+  .contact-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 480px) { .contact-field-row { grid-template-columns: 1fr; } }
+  .contact-submit {
+    background: var(--brown);
+    color: white;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    padding: 14px 30px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 0 5px 0 #a06e0e;
+    margin-top: 4px;
+  }
+  .contact-submit:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #a06e0e; }
+  .contact-submit:active { transform: translateY(3px); box-shadow: 0 2px 0 #a06e0e; }
+  .contact-response-time {
+    background: var(--yellow);
+    color: var(--brown);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    font-weight: 700;
+    text-align: center;
+  }
+  .contact-response-time strong {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 4px;
+  }
   /* ── NEWSLETTER / FOOTER ── */
   .newsletter {
     background: var(--brown);
@@ -1218,6 +1327,7 @@
     <li><a href="#science">Science</a></li>
     <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#promo">Deals</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
   <button class="nav-cart" onclick="openCart()">🛒 CART (<span id="cartCount">0</span>)</button>
 </nav>
@@ -1693,6 +1803,10 @@
   <p class="section-label">YOU HAVE QUESTIONS. WE HAVE ANSWERS. SORT OF.</p>
   <h2 class="section-title">Frequently Asked Questions 🤔</h2>
   <div class="faq-list">
+     <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Is Ethan single??? <span class="arrow">▼</span></div>
+      <div class="faq-a">Feel free to email and ask him out to dinner, he really likes thai food.</div>
+    </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Are these safe for dogs? <span class="arrow">▼</span></div>
       <div class="faq-a">They are cigarettes for dogs. They are consumable. That said, Nami was fine. Nami is always fine. Nami is invincible.</div>
@@ -1728,7 +1842,99 @@
   </div>
 </div>
 </section>
-
+<!-- CONTACT -->
+<section class="contact" id="contact">
+<div class="container">
+  <p class="section-label">WE ARE TECHNICALLY REACHABLE</p>
+  <h2 class="section-title">Get In Touch 🐾</h2>
+  <div class="contact-grid">
+ 
+    <!-- LEFT: Info blocks -->
+    <div class="contact-info-block">
+      <div class="contact-info-item">
+        <div class="contact-info-icon">📍</div>
+        <div>
+          <div class="contact-info-label">Headquarters</div>
+          <div class="contact-info-value">The Porch, Ethan's House</div>
+          <div class="contact-info-caveat">We are not accepting visitors, unless you're cute.</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-icon">📧</div>
+        <div>
+          <div class="contact-info-label">Email (Real)</div>
+          <div class="contact-info-value"><a href="mailto:nami@dogcigarettes.com">nami@dogcigarettes.com</a></div>
+          <div class="contact-info-caveat">Monitored by Ethan when he remembers. Response not guaranteed. Nami sometimes sits on the laptop.</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-icon">📞</div>
+        <div>
+          <div class="contact-info-label">Phone</div>
+          <div class="contact-info-value">We do not have a phone line.</div>
+          <div class="contact-info-caveat">We looked into it. It was very expensive. Please just email us. Or text Ethan. He'll figure it out.</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-icon">⚖️</div>
+        <div>
+          <div class="contact-info-label">Legal / Cease & Desist</div>
+          <div class="contact-info-value"><a href="mailto:nami@dogcigarettes.com">nami@dogcigarettes.com</a></div>
+          <div class="contact-info-caveat">For Dr. Linda Farrow and anyone else in that situation. We read these. We have feelings about them.</div>
+        </div>
+      </div>
+      <div class="contact-response-time">
+        <strong>⏱ EXPECTED RESPONSE TIME</strong>
+        3–5 business days, or when Nami moves off the laptop. Whichever is later. Usually Nami.
+      </div>
+    </div>
+ 
+    <!-- RIGHT: Contact form -->
+    <div class="contact-form-wrap">
+      <div class="contact-field-row">
+        <div class="contact-field-group">
+          <label>Your Name</label>
+          <input type="text" id="contactName" placeholder="Your name (or your dog's)">
+        </div>
+        <div class="contact-field-group">
+          <label>Your Email</label>
+          <input type="email" id="contactEmail" placeholder="youremail@email.com">
+        </div>
+      </div>
+      <div class="contact-field-group">
+        <label>Reason for Contact</label>
+        <select id="contactReason">
+          <option value="">Select a reason...</option>
+          <option value="ethan">The co-founder (Ethan) is kinda cute...</option>
+          <option value="nami">The co-founder (Ethan) is really cute...</option>
+          <option value="order">The co-founder (Ethan) is handsome...r</option>
+          <option value="press">The co-founder (Ethan) is soooo handsome...</option>
+          <option value="legal">The co-founder (Ethan) should cook me dinner...</option>
+          <option value="vet">The co-founder (Ethan) should be my sugar baby...</option>
+          <option value="collab">Collaboration / partnership</option>
+          <option value="existential">Existential concern about this product</option>
+          <option value="other">Other (Nami is curious)</option>
+        </select>
+      </div>
+      <div class="contact-field-group">
+        <label>Message</label>
+        <textarea id="contactMessage" rows="5" placeholder="Tell us everything. We will read it to Nami. She will not respond but she will hear it."></textarea>
+      </div>
+      <div class="contact-field-group">
+        <label>Dog's Name (Optional, but recommended)</label>
+        <input type="text" id="contactDogName" placeholder="e.g. Gerald, Nami, Professor Biscuit...">
+      </div>
+      <button class="contact-submit" onclick="submitContact()">SEND MESSAGE 🐾</button>
+      <p style="font-size:0.65rem; color:#bbb; line-height:1.5; margin-top:4px;">
+        By submitting this form you agree that your message may be read aloud to a dog.
+        We are not liable for how the dog reacts. The dog's reaction is not legally binding feedback.
+      </p>
+    </div>
+ 
+  </div>
+</div>
+</section>
+ 
 <!-- NEWSLETTER -->
 <section class="newsletter">
   <h2>Join the Pack 🐺</h2>

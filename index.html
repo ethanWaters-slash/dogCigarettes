@@ -96,10 +96,14 @@
   }
   .hero h1 {
     font-family: 'Permanent Marker', cursive;
-    font-size: clamp(3rem, 10vw, 7rem);
-    line-height: 1;
+    font-size: clamp(2rem, 9vw, 7rem);
+    line-height: 1.1;
     text-shadow: 4px 4px 0 rgba(0,0,0,0.4);
     margin-bottom: 10px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 100%;
+    padding: 0 10px;
   }
   .hero h1 span { color: var(--yellow); }
   .hero-sub {
@@ -945,7 +949,7 @@
     .nav-links { display: none; }
     .nav-logo { font-size: 1.1rem; }
     .hero { padding: 40px 16px 30px; }
-    .hero h1 { font-size: clamp(2.5rem, 14vw, 5rem); }
+    .hero h1 { font-size: clamp(1.6rem, 11vw, 5rem); }
     .hero-dog { width: 160px; height: 160px; font-size: 5rem; }
     .stats-bar { flex-direction: column; align-items: center; gap: 16px; padding: 24px 16px; }
     .stat-item { min-width: unset; width: 100%; }
@@ -969,7 +973,7 @@
     .faq-list { max-width: 100%; }
   }
   @media (max-width: 480px) {
-    .hero h1 { font-size: clamp(2.2rem, 16vw, 4rem); }
+    .hero h1 { font-size: clamp(1.4rem, 10vw, 3.5rem); }
     .ticker-inner { font-size: 0.9rem; }
     .stat-number { font-size: 2.2rem; }
     .merch-grid { grid-template-columns: 1fr; }

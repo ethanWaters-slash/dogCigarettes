@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DOG CIGARETTES™ — A Dog's Best Friend</title>
+<title>DOG CIGARETTES™ — Gear for Dogs (& Their Humans)</title>
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Bebas+Neue&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -14,23 +14,31 @@
     --yellow: #F4D03F;
     --dark: #1a1a1a;
     --smoke: #e8e8e8;
+    --green: #2c6e49;
   }
-
-  html {
-    scroll-behavior: smooth;
-  }
-  /* offset anchor targets so the sticky nav doesn't cover them */
-  #products, #merch, #science, #testimonials, #promo, #about {
+  html { scroll-behavior: smooth; }
+  #products, #merch, #fieldtests, #testimonials, #promo, #about {
     scroll-margin-top: 80px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: 'Nunito', sans-serif;
     background: var(--cream);
     color: var(--dark);
     overflow-x: hidden;
   }
+
+  /* ── AFFILIATE BANNER ── */
+  .affiliate-bar {
+    background: var(--dark);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 6px 20px;
+    font-size: 0.65rem;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+  }
+  .affiliate-bar a { color: rgba(255,255,255,0.5); }
 
   /* ── MARQUEE TICKER ── */
   .ticker {
@@ -66,11 +74,8 @@
     position: absolute;
     inset: 0;
     background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 30px,
-      rgba(255,255,255,0.03) 30px,
-      rgba(255,255,255,0.03) 60px
+      45deg, transparent, transparent 30px,
+      rgba(255,255,255,0.03) 30px, rgba(255,255,255,0.03) 60px
     );
   }
   .hero-badge {
@@ -112,7 +117,7 @@
     animation: float 3s ease-in-out infinite;
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
     width: 220px;
-     height: 220px;
+    height: 220px;
   }
   @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -121,7 +126,7 @@
   .hero-disclaimer {
     font-size: 0.65rem;
     color: rgba(255,255,255,0.3);
-    max-width: 400px;
+    max-width: 480px;
     margin: 20px auto 0;
     line-height: 1.4;
   }
@@ -141,14 +146,8 @@
     box-shadow: 0 6px 0 #b8960a;
     margin: 10px;
   }
-  .cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 0 #b8960a;
-  }
-  .cta-btn:active {
-    transform: translateY(3px);
-    box-shadow: 0 3px 0 #b8960a;
-  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #b8960a; }
+  .cta-btn:active { transform: translateY(3px); box-shadow: 0 3px 0 #b8960a; }
   .cta-btn.outline {
     background: transparent;
     color: white;
@@ -166,10 +165,7 @@
     padding: 30px 20px;
     gap: 20px;
   }
-  .stat-item {
-    text-align: center;
-    min-width: 120px;
-  }
+  .stat-item { text-align: center; min-width: 120px; }
   .stat-number {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 3rem;
@@ -210,11 +206,11 @@
   }
   .container { max-width: 1100px; margin: 0 auto; }
 
-  /* ── PRODUCT VARIANTS ── */
+  /* ── PRODUCT / AFFILIATE CARDS ── */
   .products { background: white; }
   .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 24px;
   }
   .product-card {
@@ -224,7 +220,6 @@
     text-align: center;
     position: relative;
     transition: transform 0.2s, box-shadow 0.2s;
-    cursor: pointer;
   }
   .product-card:hover {
     transform: translateY(-6px);
@@ -248,15 +243,13 @@
     border-radius: 100px;
     white-space: nowrap;
   }
-  .product-card .badge.gold {
-    background: var(--yellow);
-    color: var(--brown);
-  }
+  .product-card .badge.gold { background: var(--yellow); color: var(--brown); }
+  .product-card .badge.green { background: var(--green); color: white; }
   .product-emoji { font-size: 4rem; display: block; margin-bottom: 10px; }
   .product-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 2px;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.5rem;
+    line-height: 1.2;
     margin-bottom: 6px;
   }
   .product-desc { font-size: 0.85rem; color: #666; margin-bottom: 16px; line-height: 1.5; }
@@ -264,9 +257,53 @@
     font-family: 'Permanent Marker', cursive;
     font-size: 2rem;
     color: var(--brown);
+    margin-bottom: 4px;
   }
-  .product-price s { font-size: 1rem; color: #999; margin-right: 6px; }
-  .product-flavors { font-size: 0.7rem; color: #999; margin-top: 6px; }
+  .product-retailer { font-size: 0.7rem; color: #999; margin-bottom: 14px; }
+  .product-nami {
+    font-size: 0.72rem;
+    color: var(--brown);
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 8px 10px;
+    margin-bottom: 14px;
+    line-height: 1.4;
+    font-style: italic;
+  }
+
+  /* affiliate shop button */
+  .shop-btn {
+    display: block;
+    background: var(--yellow);
+    color: var(--brown);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    padding: 11px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 0 4px 0 #b8960a;
+  }
+  .shop-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #b8960a; }
+  .shop-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #b8960a; }
+
+  /* category divider inside product grid */
+  .grid-divider {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 10px 0 4px;
+  }
+  .grid-divider-line { flex: 1; height: 1px; background: #eee; }
+  .grid-divider-label {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    color: #bbb;
+    white-space: nowrap;
+  }
 
   /* ── MERCH SECTION ── */
   .merch { background: var(--tan); position: relative; overflow: hidden; }
@@ -275,11 +312,8 @@
     position: absolute;
     inset: 0;
     background: repeating-linear-gradient(
-      135deg,
-      transparent,
-      transparent 40px,
-      rgba(255,255,255,0.06) 40px,
-      rgba(255,255,255,0.06) 80px
+      135deg, transparent, transparent 40px,
+      rgba(255,255,255,0.06) 40px, rgba(255,255,255,0.06) 80px
     );
     pointer-events: none;
   }
@@ -341,7 +375,6 @@
     margin-bottom: 12px;
   }
   .merch-price s { font-size: 0.9rem; color: #999; margin-right: 6px; }
-  /* option selector (sizes / colors) */
   .merch-options {
     display: flex;
     flex-wrap: wrap;
@@ -361,11 +394,7 @@
     color: #555;
     font-family: 'Nunito', sans-serif;
   }
-  .merch-opt.selected {
-    border-color: var(--brown);
-    background: var(--brown);
-    color: white;
-  }
+  .merch-opt.selected { border-color: var(--brown); background: var(--brown); color: white; }
   .merch-buy {
     background: var(--yellow);
     color: var(--brown);
@@ -380,10 +409,9 @@
     transition: background 0.15s, transform 0.1s;
   }
   .merch-buy:hover { transform: translateY(-2px); }
-  .merch-buy:active { transform: translateY(1px); }
 
-  /* ── SCIENCE SECTION ── */
-  .science { background: var(--cream); }
+  /* ── FIELD TESTS (was SCIENCE) ── */
+  .fieldtests { background: var(--cream); }
   .science-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -450,6 +478,7 @@
     width: 0;
   }
   .bar-fill.gold { background: var(--yellow); color: var(--brown); }
+  .bar-fill.green { background: var(--green); color: white; }
   .bar-fill.gray { background: #555; color: #999; }
   .chart-note { font-size: 0.6rem; color: rgba(255,255,255,0.2); text-align: center; margin-top: 20px; }
 
@@ -467,23 +496,25 @@
     position: relative;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
   }
-  .testi-quote {
-    font-size: 3rem;
-    font-family: Georgia, serif;
-    color: var(--tan);
-    line-height: 1;
-    margin-bottom: 10px;
-  }
+  .testi-quote { font-size: 3rem; font-family: Georgia, serif; color: var(--tan); line-height: 1; margin-bottom: 10px; }
   .testi-text { font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px; color: #333; }
-  .testi-author {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
   .testi-avatar { font-size: 2.5rem; }
   .testi-name { font-weight: 900; font-size: 0.9rem; }
   .testi-title { font-size: 0.75rem; color: #999; }
   .testi-stars { color: var(--yellow); font-size: 1rem; margin-top: 4px; }
+  .testi-product {
+    font-size: 0.65rem;
+    background: var(--cream);
+    color: var(--brown);
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-family: 'Bebas Neue', sans-serif;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
   .verified {
     position: absolute;
     top: 16px; right: 16px;
@@ -504,7 +535,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
-    max-width: 800px;
+    max-width: 860px;
     margin: 0 auto 40px;
   }
   .promo-card {
@@ -521,6 +552,20 @@
     margin-bottom: 8px;
   }
   .promo-card p { font-size: 0.8rem; opacity: 0.8; line-height: 1.5; }
+  .promo-shop-btn {
+    display: inline-block;
+    margin-top: 14px;
+    background: white;
+    color: var(--red);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.1s;
+  }
+  .promo-shop-btn:hover { transform: scale(1.03); }
   .promo-code {
     display: inline-block;
     background: var(--yellow);
@@ -556,11 +601,7 @@
   /* ── FAQ ── */
   .faq { background: white; }
   .faq-list { max-width: 750px; margin: 0 auto; }
-  .faq-item {
-    border-bottom: 1px solid #eee;
-    padding: 20px 0;
-    cursor: pointer;
-  }
+  .faq-item { border-bottom: 1px solid #eee; padding: 20px 0; cursor: pointer; }
   .faq-q {
     font-weight: 900;
     font-size: 1rem;
@@ -569,11 +610,7 @@
     align-items: center;
     gap: 10px;
   }
-  .faq-q .arrow {
-    font-size: 1.2rem;
-    transition: transform 0.3s;
-    flex-shrink: 0;
-  }
+  .faq-q .arrow { font-size: 1.2rem; transition: transform 0.3s; flex-shrink: 0; }
   .faq-a {
     font-size: 0.9rem;
     color: #555;
@@ -584,7 +621,8 @@
   }
   .faq-item.open .faq-a { max-height: 200px; padding-top: 12px; }
   .faq-item.open .arrow { transform: rotate(180deg); }
-/* ── CONTACT ── */
+
+  /* ── CONTACT ── */
   .contact { background: white; }
   .contact-grid {
     display: grid;
@@ -594,9 +632,7 @@
     max-width: 900px;
     margin: 0 auto;
   }
-  @media (max-width: 768px) {
-    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-  }
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 40px; } }
   .contact-info-block { display: flex; flex-direction: column; gap: 20px; }
   .contact-info-item {
     display: flex;
@@ -615,18 +651,8 @@
     color: var(--brown);
     margin-bottom: 4px;
   }
-  .contact-info-value {
-    font-size: 0.9rem;
-    color: var(--dark);
-    font-weight: 700;
-    line-height: 1.4;
-  }
-  .contact-info-caveat {
-    font-size: 0.65rem;
-    color: #aaa;
-    margin-top: 3px;
-    line-height: 1.4;
-  }
+  .contact-info-value { font-size: 0.9rem; color: var(--dark); font-weight: 700; line-height: 1.4; }
+  .contact-info-caveat { font-size: 0.65rem; color: #aaa; margin-top: 3px; line-height: 1.4; }
   .contact-form-wrap { display: flex; flex-direction: column; gap: 14px; }
   .contact-field-group { display: flex; flex-direction: column; gap: 6px; }
   .contact-field-group label {
@@ -651,15 +677,8 @@
   }
   .contact-field-group input:focus,
   .contact-field-group select:focus,
-  .contact-field-group textarea:focus {
-    outline: none;
-    border-color: var(--brown);
-  }
-  .contact-field-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
+  .contact-field-group textarea:focus { outline: none; border-color: var(--brown); }
+  .contact-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 480px) { .contact-field-row { grid-template-columns: 1fr; } }
   .contact-submit {
     background: var(--brown);
@@ -672,11 +691,11 @@
     border: none;
     cursor: pointer;
     transition: transform 0.1s, box-shadow 0.1s;
-    box-shadow: 0 5px 0 #a06e0e;
+    box-shadow: 0 5px 0 #3d2210;
     margin-top: 4px;
   }
-  .contact-submit:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #a06e0e; }
-  .contact-submit:active { transform: translateY(3px); box-shadow: 0 2px 0 #a06e0e; }
+  .contact-submit:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #3d2210; }
+  .contact-submit:active { transform: translateY(3px); box-shadow: 0 2px 0 #3d2210; }
   .contact-response-time {
     background: var(--yellow);
     color: var(--brown);
@@ -694,6 +713,7 @@
     display: block;
     margin-bottom: 4px;
   }
+
   /* ── NEWSLETTER / FOOTER ── */
   .newsletter {
     background: var(--brown);
@@ -701,11 +721,7 @@
     text-align: center;
     padding: 60px 20px;
   }
-  .newsletter h2 {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 2.2rem;
-    margin-bottom: 10px;
-  }
+  .newsletter h2 { font-family: 'Permanent Marker', cursive; font-size: 2.2rem; margin-bottom: 10px; }
   .newsletter p { opacity: 0.7; margin-bottom: 24px; font-size: 0.9rem; }
   .email-form {
     display: flex;
@@ -758,7 +774,7 @@
     padding: 12px 30px;
     box-shadow: 0 2px 20px rgba(0,0,0,0.3);
   }
-.nav-logo {
+  .nav-logo {
     font-family: 'Permanent Marker', cursive;
     font-size: 1.6rem;
     text-decoration: none;
@@ -778,11 +794,7 @@
     align-self: flex-start;
     margin-left: 1px;
   }
-  .nav-links {
-    display: flex;
-    gap: 24px;
-    list-style: none;
-  }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
   .nav-links a {
     color: rgba(255,255,255,0.7);
     text-decoration: none;
@@ -792,262 +804,8 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--yellow); }
-  .nav-cart {
-    background: var(--yellow);
-    color: var(--brown);
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 2px;
-    padding: 8px 18px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    position: relative;
-  }
 
-  /* ── CART DRAWER ── */
-  .cart-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 200;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-  }
-  .cart-overlay.open { opacity: 1; pointer-events: auto; }
-  .cart-drawer {
-    position: fixed;
-    top: 0; right: 0;
-    height: 100%;
-    width: 420px;
-    max-width: 90vw;
-    background: var(--cream);
-    z-index: 201;
-    transform: translateX(100%);
-    transition: transform 0.35s cubic-bezier(.4,0,.2,1);
-    display: flex;
-    flex-direction: column;
-    box-shadow: -10px 0 40px rgba(0,0,0,0.25);
-  }
-  .cart-drawer.open { transform: translateX(0); }
-  .cart-header {
-    background: var(--brown);
-    color: white;
-    padding: 22px 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .cart-header h3 {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 1.5rem;
-  }
-  .cart-close {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.8rem;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0 4px;
-  }
-  .cart-items {
-    flex: 1;
-    overflow-y: auto;
-    padding: 16px 20px;
-  }
-  .cart-empty {
-    text-align: center;
-    color: #999;
-    padding: 60px 20px;
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-  .cart-empty .big { font-size: 3rem; display: block; margin-bottom: 12px; }
-  .cart-item {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    background: white;
-    border-radius: 12px;
-    padding: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-  .cart-item-emoji {
-    font-size: 2.2rem;
-    width: 52px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--cream);
-    border-radius: 10px;
-    flex-shrink: 0;
-  }
-  .cart-item-info { flex: 1; min-width: 0; }
-  .cart-item-name {
-    font-weight: 900;
-    font-size: 0.85rem;
-    line-height: 1.2;
-    margin-bottom: 2px;
-  }
-  .cart-item-variant { font-size: 0.68rem; color: #999; margin-bottom: 4px; }
-  .cart-item-price { font-size: 0.8rem; color: var(--brown); font-weight: 700; }
-  .qty-control {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 6px;
-  }
-  .qty-btn {
-    width: 24px; height: 24px;
-    border-radius: 6px;
-    border: 1.5px solid #ddd;
-    background: white;
-    cursor: pointer;
-    font-size: 1rem;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--brown);
-    font-weight: 700;
-  }
-  .qty-btn:hover { border-color: var(--brown); }
-  .qty-num { font-size: 0.85rem; font-weight: 700; min-width: 20px; text-align: center; }
-  .cart-item-remove {
-    background: none;
-    border: none;
-    color: #ccc;
-    cursor: pointer;
-    font-size: 1.1rem;
-    align-self: flex-start;
-    transition: color 0.15s;
-  }
-  .cart-item-remove:hover { color: var(--red); }
-  .cart-footer {
-    border-top: 1px solid #e5ddd0;
-    padding: 20px 24px;
-    background: var(--cream);
-  }
-  .cart-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    color: #666;
-    margin-bottom: 8px;
-  }
-  .cart-row.total {
-    font-size: 1.2rem;
-    color: var(--dark);
-    font-weight: 900;
-    border-top: 1px dashed #ccc;
-    padding-top: 10px;
-    margin-top: 6px;
-  }
-  .cart-row.total .amt { font-family: 'Permanent Marker', cursive; color: var(--brown); }
-  .checkout-btn {
-    width: 100%;
-    background: var(--yellow);
-    color: var(--brown);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
-    letter-spacing: 2px;
-    padding: 15px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    margin-top: 14px;
-    box-shadow: 0 5px 0 #b8960a;
-    transition: transform 0.1s, box-shadow 0.1s;
-  }
-  .checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #b8960a; }
-  .checkout-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #b8960a; }
-  .checkout-btn:disabled {
-    background: #ccc;
-    color: #888;
-    box-shadow: 0 5px 0 #aaa;
-    cursor: not-allowed;
-  }
-  .cart-fine { font-size: 0.6rem; color: #bbb; text-align: center; margin-top: 10px; line-height: 1.4; }
-
-  /* ── OUT OF STOCK MODAL ── */
-  .oos-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(26,26,26,0.85);
-    z-index: 300;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-  }
-  .oos-overlay.open { opacity: 1; pointer-events: auto; }
-  .oos-modal {
-    background: var(--cream);
-    border-radius: 20px;
-    max-width: 440px;
-    width: 100%;
-    text-align: center;
-    padding: 0;
-    overflow: hidden;
-    transform: scale(0.85) translateY(20px);
-    transition: transform 0.35s cubic-bezier(.34,1.56,.64,1);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-  }
-  .oos-overlay.open .oos-modal { transform: scale(1) translateY(0); }
-  .oos-top {
-    background: var(--red);
-    color: white;
-    padding: 32px 24px 26px;
-    position: relative;
-    overflow: hidden;
-  }
-  .oos-top::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.06) 18px, rgba(255,255,255,0.06) 36px);
-  }
-  .oos-emoji { font-size: 4rem; line-height: 1; position: relative; animation: shake 0.6s ease-in-out; }
-  @keyframes shake {
-    0%,100% { transform: rotate(0); }
-    20% { transform: rotate(-12deg); }
-    40% { transform: rotate(10deg); }
-    60% { transform: rotate(-6deg); }
-    80% { transform: rotate(4deg); }
-  }
-  .oos-top h2 {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 2rem;
-    margin-top: 10px;
-    position: relative;
-  }
-  .oos-body { padding: 26px 28px 30px; }
-  .oos-body p { font-size: 0.92rem; color: #555; line-height: 1.6; margin-bottom: 14px; }
-  .oos-body .lead { font-size: 1.05rem; color: var(--dark); font-weight: 700; }
-  .oos-fine { font-size: 0.62rem; color: #aaa; line-height: 1.5; margin-top: 4px; }
-  .oos-btn {
-    background: var(--brown);
-    color: white;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    padding: 13px 36px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: transform 0.1s;
-  }
-  .oos-btn:hover { transform: translateY(-2px); }
-  .oos-btn:active { transform: translateY(1px); }
-
-  /* ── AWARD BANNER ── */
+  /* ── AWARDS ── */
   .awards {
     background: var(--yellow);
     padding: 20px;
@@ -1068,7 +826,109 @@
   }
   .award-item span { font-size: 1.5rem; }
 
-  /* ── MOBILE RESPONSIVE ── */
+  /* ── DOG LINEUP / ABOUT ── */
+  .dog-showcase-item {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  .dog-showcase-item.featured-dog img {
+    max-width: 320px;
+    border-color: var(--yellow);
+    border-width: 5px;
+  }
+  .about {
+    background: var(--cream);
+    padding: 80px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    background: var(--yellow);
+    opacity: 0.08;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .about::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: var(--brown);
+    opacity: 0.06;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .about-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .about-visual { text-align: center; position: relative; }
+  .about-caption {
+    margin-top: 14px;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    color: var(--brown);
+    opacity: 0.6;
+  }
+  .about-content .section-label { text-align: left; }
+  .about-content .section-title { text-align: left; margin-bottom: 24px; }
+  .about-pull {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 1.3rem;
+    color: var(--brown);
+    border-left: 4px solid var(--yellow);
+    padding: 10px 0 10px 20px;
+    margin: 24px 0;
+    line-height: 1.4;
+  }
+  .about-body { font-size: 0.95rem; line-height: 1.8; color: #444; }
+  .about-body p { margin-bottom: 16px; }
+  .about-body p:last-child { margin-bottom: 0; }
+  .about-tag {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--brown);
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    font-size: 0.7rem;
+    padding: 4px 14px;
+    border-radius: 100px;
+    margin: 4px 4px 0 0;
+  }
+  .about-tags { margin-top: 20px; }
+  .about-portrait-img {
+    width: 100%;
+    max-width: 260px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 8px 8px 0 var(--yellow);
+    display: block;
+    margin: 0 auto;
+  }
+  @media (max-width: 700px) {
+    .about-inner { grid-template-columns: 1fr; gap: 32px; }
+    .about-content .section-label,
+    .about-content .section-title { text-align: center; }
+    .about-pull { font-size: 1.1rem; }
+    .about-tags { text-align: center; }
+  }
+
+  /* ── MOBILE ── */
   @media (max-width: 768px) {
     nav { padding: 10px 16px; }
     .nav-links { display: none; }
@@ -1093,8 +953,6 @@
     .email-form { flex-direction: column; align-items: center; }
     .email-form input { width: 100%; max-width: 320px; }
     .email-form button { width: 100%; max-width: 320px; }
-    .product-card { padding: 28px 16px; }
-    .nav-cart { font-size: 0.8rem; padding: 7px 12px; }
     .promo-code { font-size: 1.5rem; padding: 10px 28px; }
     .section-title { font-size: clamp(1.6rem, 7vw, 2.8rem); }
     .faq-list { max-width: 100%; }
@@ -1105,216 +963,26 @@
     .stat-number { font-size: 2.2rem; }
     .merch-grid { grid-template-columns: 1fr; }
   }
-
-  /* ── DOG LINEUP SECTION ── */
-  .dog-lineup {
-    background: var(--brown);
-    padding: 60px 20px;
-    text-align: center;
-    overflow: hidden;
-  }
-  .dog-lineup .section-label { color: rgba(255,255,255,0.6); }
-  .dog-lineup .section-title { color: white; }
-  .dog-showcase {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    gap: 0;
-    max-width: 900px;
-    margin: 0 auto;
-    position: relative;
-  }
-  .dog-showcase-item {
-    flex: 1;
-    text-align: center;
-    position: relative;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
-  .dog-showcase-item:hover { transform: translateY(-12px) scale(1.05); z-index: 2; }
-  .dog-showcase-item img {
-    width: 100%;
-    max-width: 280px;
-    border-radius: 50%;
-    border: 4px solid rgba(255,255,255,0.15);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    display: block;
-    margin: 0 auto;
-    background: var(--yellow);
-    transition: box-shadow 0.3s ease;
-  }
-  .dog-showcase-item:hover img {
-    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-    border-color: var(--yellow);
-  }
-  .dog-showcase-item .dog-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.2rem;
-    letter-spacing: 3px;
-    color: var(--yellow);
-    margin-top: 16px;
-  }
-  .dog-showcase-item .dog-role {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.5);
-    margin-top: 4px;
-  }
-  .dog-showcase-item.featured-dog img {
-    max-width: 320px;
-    border-color: var(--yellow);
-    border-width: 5px;
-  }
-  .dog-showcase-item.featured-dog .dog-name { font-size: 1.5rem; color: white; }
-  @media (max-width: 600px) {
-    .dog-showcase { flex-direction: column; align-items: center; gap: 24px; }
-    .dog-showcase-item img { max-width: 200px; }
-    .dog-showcase-item.featured-dog img { max-width: 240px; }
-    .dog-showcase-item:hover { transform: translateY(-8px) scale(1.02); }
-  }
-  /* ── ABOUT SECTION ── */
- .about {
-   background: var(--cream);
-   padding: 80px 20px;
-   position: relative;
-   overflow: hidden;
- }
- .about::before {
-   content: '';
-   position: absolute;
-   top: -60px; right: -60px;
-   width: 320px; height: 320px;
-   background: var(--yellow);
-   opacity: 0.08;
-   border-radius: 50%;
-   pointer-events: none;
- }
- .about::after {
-   content: '';
-   position: absolute;
-   bottom: -80px; left: -80px;
-   width: 400px; height: 400px;
-   background: var(--brown);
-   opacity: 0.06;
-   border-radius: 50%;
-   pointer-events: none;
- }
- .about-inner {
-   max-width: 900px;
-   margin: 0 auto;
-   display: grid;
-   grid-template-columns: 1fr 1.6fr;
-   gap: 60px;
-   align-items: center;
-   position: relative;
-   z-index: 1;
- }
- .about-visual {
-   text-align: center;
-   position: relative;
- }
- .about-portrait {
-   width: 100%;
-   max-width: 260px;
-   border-radius: 20px;
-   background: var(--brown);
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   aspect-ratio: 1;
-   margin: 0 auto;
-   box-shadow: 8px 8px 0 var(--yellow);
-   font-size: 7rem;
-   line-height: 1;
-   position: relative;
-   overflow: hidden;
- }
- .about-portrait::after {
-   content: '';
-   position: absolute;
-   inset: 0;
-   background: repeating-linear-gradient(
-     -45deg,
-     transparent,
-     transparent 20px,
-     rgba(255,255,255,0.03) 20px,
-     rgba(255,255,255,0.03) 40px
-   );
- }
- .about-caption {
-   margin-top: 14px;
-   font-family: 'Bebas Neue', sans-serif;
-   letter-spacing: 3px;
-   font-size: 0.8rem;
-   color: var(--brown);
-   opacity: 0.6;
- }
- .about-content {}
- .about-content .section-label { text-align: left; }
- .about-content .section-title { text-align: left; margin-bottom: 24px; }
- .about-pull {
-   font-family: 'Permanent Marker', cursive;
-   font-size: 1.3rem;
-   color: var(--brown);
-   border-left: 4px solid var(--yellow);
-   padding: 10px 0 10px 20px;
-   margin: 24px 0;
-   line-height: 1.4;
- }
- .about-body {
-   font-size: 0.95rem;
-   line-height: 1.8;
-   color: #444;
- }
- .about-body p { margin-bottom: 16px; }
- .about-body p:last-child { margin-bottom: 0; }
- .about-tag {
-   display: inline-block;
-   background: var(--yellow);
-   color: var(--brown);
-   font-family: 'Bebas Neue', sans-serif;
-   letter-spacing: 2px;
-   font-size: 0.7rem;
-   padding: 4px 14px;
-   border-radius: 100px;
-   margin: 4px 4px 0 0;
- }
- .about-tags { margin-top: 20px; }
- @media (max-width: 700px) {
-   .about-inner {
-     grid-template-columns: 1fr;
-     gap: 32px;
-   }
-   .about-content .section-label,
-   .about-content .section-title { text-align: center; }
-   .about-pull { font-size: 1.1rem; }
-   .about-tags { text-align: center; }
- }
- .about-portrait-img {
-  width: 100%;
-  max-width: 260px;
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 8px 8px 0 var(--yellow);
-  display: block;
-  margin: 0 auto;
-}
-
 </style>
 <link rel="icon" type="image/png" href="dogCigs2.png">
+<!-- AvantLink affiliate verification -->
+<script type="text/javascript" src="http://classic.avantlink.com/affiliate_app_confirm.php?mode=js&authResponse=6209c4d0bcf70a11fc9e8a4948f8766184aa7a39"></script>
 </head>
 <body>
+
+<!-- AFFILIATE DISCLOSURE BAR -->
+<div class="affiliate-bar">
+  🐾 <strong style="color:rgba(255,255,255,0.6);">Affiliate Disclosure:</strong> Dog Cigarettes™ earns a small commission when you shop through our links, at no extra cost to you. Nami receives no compensation. She doesn't know what money is.
+</div>
 
 <!-- TICKER -->
 <div class="ticker">
   <span class="ticker-inner">
-    🐾 INTRODUCING DOG CIGARETTES™ &nbsp;•&nbsp; THE #1 CIGARETTE FOR DOGS IN THE ENTIRE WORLD* &nbsp;•&nbsp;
-    ENDORSED BY DOGS WHO CAN'T LEGALLY ENDORSE THINGS &nbsp;•&nbsp;
-    "BETTER THAN FETCH" — SOME DOG, PROBABLY &nbsp;•&nbsp;
-    FREE SHIPPING ON ORDERS OVER $9,999 &nbsp;•&nbsp;
-    VOTED "A PRODUCT FOR DOGS" — THE NEW BARK TIMES &nbsp;•&nbsp;
-    🐾 INTRODUCING DOG CIGARETTES™ &nbsp;•&nbsp; THE #1 CIGARETTE FOR DOGS IN THE ENTIRE WORLD*
+    🐾 NAMI TESTED IT &nbsp;•&nbsp; SHE WAS UNIMPRESSED &nbsp;•&nbsp; WE'RE RECOMMENDING IT ANYWAY &nbsp;•&nbsp;
+    REAL GEAR FOR REAL DOGS &nbsp;•&nbsp; AND THEIR SLIGHTLY LESS AGILE HUMANS &nbsp;•&nbsp;
+    AFFILIATE LINKS INSIDE (DISCLOSED, UNLIKE OUR FEELINGS) &nbsp;•&nbsp;
+    NAMI SNIFF-TESTED EVERYTHING &nbsp;•&nbsp; SOME OF IT SHE ALSO ATE &nbsp;•&nbsp;
+    🐾 NAMI TESTED IT &nbsp;•&nbsp; SHE WAS UNIMPRESSED &nbsp;•&nbsp; WE'RE RECOMMENDING IT ANYWAY
   </span>
 </div>
 
@@ -1322,39 +990,39 @@
 <nav>
   <a class="nav-logo" href="#">🐾 <span class="nav-logo-dog">Dog</span><span class="nav-logo-cig">Cigarettes</span><span class="nav-logo-tm">™</span></a>
   <ul class="nav-links">
-    <li><a href="#products">Products</a></li>
+    <li><a href="#products">Nami's Picks</a></li>
     <li><a href="#merch">Merch</a></li>
-    <li><a href="#science">Science</a></li>
+    <li><a href="#fieldtests">Field Tests</a></li>
     <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#promo">Deals</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <button class="nav-cart" onclick="openCart()">🛒 CART (<span id="cartCount">0</span>)</button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <span class="hero-badge">⭐ EST. 2026 &nbsp;|&nbsp; WORLD'S ONLY &nbsp;|&nbsp; 100% UNNECESSARY</span>
+  <span class="hero-badge">⭐ EST. 2026 &nbsp;|&nbsp; NAMI TESTED &nbsp;|&nbsp; ETHAN APPROVED (MOSTLY)</span>
   <div class="dog-showcase-item featured-dog hero-dog">
     <img src="dogCigs1.png" alt="Nami — Chief Everything Officer" loading="lazy">
   </div>
   <h1>Dog<span>Cigarettes</span>™</h1>
-  <p class="hero-sub">A Dog's Best Friend</p>
+  <p class="hero-sub">Gear for Dogs. And Their Humans.</p>
   <br>
+  <a href="#products" class="cta-btn">See Nami's Picks 🐾</a>
   <p class="hero-disclaimer">
-    * Ranked #1 by dogs in a survey conducted entirely by us, in our kitchen, with our one dog, Nami.
-    Nami was asleep for most of the survey.
+    We started by selling fake cigarettes for dogs. That was very funny. Now we recommend real gear
+    that Nami has personally sniffed, sat on, ignored, or destroyed. We consider all of these valid testing methods.
   </p>
 </section>
 
 <!-- AWARDS -->
 <div class="awards">
-  <div class="award-item"><span>🏆</span> #1 DOG PRODUCT EVER*</div>
-  <div class="award-item"><span>🌍</span> USED IN COUNTRIES THAT ARE REAL</div>
-  <div class="award-item"><span>⭐</span> 4.9 STARS (3 REVIEWS)</div>
-  <div class="award-item"><span>🧪</span> SCIENTIFICALLY ADJACENT</div>
-  <div class="award-item"><span>🐾</span> DOG-TESTED†</div>
-  <div class="award-item"><span>💯</span> 100% DOG-SHAPED**</div>
+  <div class="award-item"><span>🐽</span> NAMI SNIFF-TESTED</div>
+  <div class="award-item"><span>📦</span> ZERO OF THESE ARE OURS</div>
+  <div class="award-item"><span>💰</span> AFFILIATE LINKS (DISCLOSED)</div>
+  <div class="award-item"><span>🦴</span> REAL PRODUCTS, REAL DOGS</div>
+  <div class="award-item"><span>⭐</span> NAMI'S RATING: 7/10*</div>
+  <div class="award-item"><span>✅</span> VET APPROVED (NOT BY US)</div>
 </div>
 
 <!-- ABOUT -->
@@ -1365,37 +1033,38 @@
       <p class="about-caption">ETHAN & NAMI — FOUNDERS</p>
     </div>
     <div class="about-content">
-      <p class="section-label">THE ORIGIN STORY NOBODY ASKED FOR</p>
-      <h2 class="section-title">Why Does This Exist? 🚬</h2>
+      <p class="section-label">THE ORIGIN STORY NOBODY ASKED FOR, CONTINUED</p>
+      <h2 class="section-title">We Pivoted. Nami Helped. 🐾</h2>
       <div class="about-body">
         <p>
-          It was a Tuesday evening in 2026. Ethan was in his backyard, cigarette in hand,
-          watching his dog Nami stare at him with those big, judgment-free eyes.
-          And he thought: <em>she deserves one too.</em>
+          It started with fake cigarettes for dogs. It was a bit. It was funny. Nami was asleep for most of it.
+          Then people started asking: <em>what gear do you actually use with Nami on trails?</em>
         </p>
         <div class="about-pull">
-          "She just looked at me like she wanted one. So I made her one. Then I made a whole company."
-          <br><span style="font-size:0.8rem; opacity:0.6;">— Ethan, Founder & Chief Cigarette Officer</span>
+          "She sniffed the harness. She sniffed the bowl. She ate one of the balls. We called it a product review."
+          <br><span style="font-size:0.8rem; opacity:0.6;">— Ethan, Founder & Chief Gear Officer</span>
         </div>
         <p>
-          Dog Cigarettes™ was born not from market research, venture capital, or a business plan —
-          but from one man's sincere desire to share a quiet moment in the backyard with his dog.
-          Nami was unimpressed. Ethan incorporated anyway.
+          So now Dog Cigarettes™ is a gear guide. Real products. Real affiliate links (disclosed above, legally).
+          Nami's opinions, rendered through body language and selective destruction.
+          The cigarettes are still here — spiritually — but the recommendations are real.
         </p>
         <p>
-          Today, Dog Cigarettes™ ships to customers across the country who understand the vision:
-          sometimes you just want to enjoy a cigarette with your dog, and your dog deserves to enjoy a cigarette with you too. We don't ask questions. Neither does Nami. She was chewing sticks during most of this.
+          We hike with Nami. We test gear with Nami. We lose balls in creeks with Nami.
+          Everything we recommend is something we've actually used. Nami has approved roughly 70% of it.
+          The other 30% she simply refused to acknowledge. We're recommending those too.
         </p>
       </div>
       <div class="about-tags">
         <span class="about-tag">EST. ON A TUESDAY</span>
-        <span class="about-tag">NAMI APPROVED*</span>
-        <span class="about-tag">MORE THAN 0 INVESTORS</span>
-        <span class="about-tag">1 DOG</span>
+        <span class="about-tag">PIVOTED ON A WEDNESDAY</span>
+        <span class="about-tag">NAMI SEMI-APPROVED</span>
+        <span class="about-tag">REAL AFFILIATE LINKS</span>
         <span class="about-tag">INFINITE AUDACITY</span>
       </div>
       <p style="font-size:0.6rem; color:#bbb; margin-top:12px; line-height:1.4;">
-        *Nami did not approve. Nami cannot approve. Nami is a dog. She did sniff the box once, which we're counting.
+        *7/10 is Nami's highest known rating. She gave her first BarkBox a 9/10 but has since revised it downward
+        for "emotional reasons." She is a dog. She cannot tell us the reasons.
       </p>
     </div>
   </div>
@@ -1405,72 +1074,156 @@
 <div class="stats-bar">
   <div class="stat-item">
     <span class="stat-number" id="stat1">0</span>
-    <div class="stat-label">Dogs Impressed</div>
-    <span class="stat-caveat">*estimated, unverified</span>
+    <div class="stat-label">Products Nami Sniffed</div>
+    <span class="stat-caveat">*sniffing = approval, probably</span>
   </div>
   <div class="stat-item">
     <span class="stat-number" id="stat2">0</span>
-    <div class="stat-label">Years of "Research"</div>
-    <span class="stat-caveat">*we thought about it over lunch a few times</span>
+    <div class="stat-label">Miles Hiked with Nami</div>
+    <span class="stat-caveat">*Nami's estimate. May include parking lot.</span>
   </div>
   <div class="stat-item">
     <span class="stat-number" id="stat3">0%</span>
-    <div class="stat-label">Vets Recommend</div>
-    <span class="stat-caveat">*technically accurate</span>
+    <div class="stat-label">Times Nami Said Thank You</div>
+    <span class="stat-caveat">*technically accurate. She is a dog.</span>
   </div>
   <div class="stat-item">
     <span class="stat-number" id="stat4">0</span>
-    <div class="stat-label">Awards Invented</div>
-    <span class="stat-caveat">*we designed the trophies ourselves</span>
+    <div class="stat-label">Balls Lost in Creeks</div>
+    <span class="stat-caveat">*confirmed. We watched it happen.</span>
   </div>
 </div>
 
-<!-- PRODUCTS -->
+<!-- PRODUCTS / NAMI'S PICKS -->
 <section class="products" id="products">
 <div class="container">
-  <p class="section-label">OUR LEGENDARY PRODUCT LINE</p>
-  <h2 class="section-title">Choose Your Dog's Vice 🚬</h2>
+  <p class="section-label">TESTED IN NAMI'S BACKYARD (AND VARIOUS TRAILS)</p>
+  <h2 class="section-title">Nami's Picks 🐾</h2>
+  <p style="text-align:center; max-width:560px; margin:0 auto 40px; color:#666; font-size:0.9rem; line-height:1.6;">
+    Everything here has been used on real hikes, in real backyards, and in one case inside a PetSmart
+    while Nami refused to walk. Affiliate links. Commission earned. Nami unaware.
+  </p>
+
   <div class="product-grid">
-    <div class="product-card">
-      <div class="badge">STARTER</div>
-      <span class="product-emoji">🐶</span>
-      <div class="product-name">Classic Barkboro™</div>
-      <p class="product-desc">The original. The icon. An even house blend of only the best. Rich aroma.</p>
-      <div class="product-price"><s>$49</s> $12.99</div>
-      <div class="product-flavors">Available in: Plain, Slightly Less Plain, and "Artisan"</div>
-      <br>
-      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addToCart('Classic Barkboro™', 12.99, '🐶')">ADD TO CART</button>
+
+    <!-- DIVIDER: DOG GEAR -->
+    <div class="grid-divider">
+      <div class="grid-divider-line"></div>
+      <div class="grid-divider-label">🐶 DOG GEAR</div>
+      <div class="grid-divider-line"></div>
     </div>
+
+    <!-- PRODUCT 1: Ruffwear Front Range Harness -->
     <div class="product-card featured">
-      <div class="badge gold">🔥 DOG'S CHOICE AWARD™</div>
-      <span class="product-emoji">🦴</span>
-      <div class="product-name">Platinum Pawboro™</div>
-      <p class="product-desc">Our premium line. Comes in a velvet box. The cigarette is slightly shinier. "The ultimate status symbol for dogs who are cool."</p>
-      <div class="product-price"><s>$200</s> $34.99</div>
-      <div class="product-flavors">Flavors: Gold Foil, Truffle (conceptually), Goodness</div>
-      <br>
-      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addToCart('Platinum Pawboro™', 34.99, '🦴')">ADD TO CART</button>
+      <div class="badge gold">🏆 NAMI'S DAILY DRIVER</div>
+      <span class="product-emoji">🎽</span>
+      <div class="product-name">Ruffwear Front Range Harness</div>
+      <p class="product-desc">No-pull, padded, four adjustment points. Nami runs to the door when she sees it. She also still acts betrayed when we put it on her. She contains multitudes.</p>
+      <div class="product-nami">🐾 "Nami rating: 8/10. She wore it for 200+ miles. She would deny this."</div>
+      <div class="product-price">from $44.95</div>
+      <div class="product-retailer">via Ruffwear (AvantLink)</div>
+      <!-- AFFILIATE LINK: Replace href with your AvantLink tracked URL for Ruffwear -->
+      <a class="shop-btn" href="https://ruffwear.com/products/front-range-harness" target="_blank" rel="noopener noreferrer">SHOP RUFFWEAR →</a>
     </div>
+
+    <!-- PRODUCT 2: KONG Classic -->
     <div class="product-card">
-      <div class="badge">WELLNESS</div>
-      <span class="product-emoji">🌿</span>
-      <div class="product-name">Organic Woofboro™</div>
-      <p class="product-desc">For the health-conscious dog owner who wants their dog to be seen as health-conscious.</p>
-      <div class="product-price"><s>$80</s> $19.99</div>
-      <div class="product-flavors">Infused with: Kale (smell only), Quinoa (vibes), Good Intentions</div>
-      <br>
-      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addToCart('Organic Woofboro™', 19.99, '🌿')">ADD TO CART</button>
+      <div class="badge">CONSUMED: 4 OF THEM</div>
+      <span class="product-emoji">🔴</span>
+      <div class="product-name">KONG Classic (Stuffable)</div>
+      <p class="product-desc">Fill with peanut butter. Freeze it. Hand to dog. You now have 45 uninterrupted minutes. This is the greatest invention in human history. We did not make it. We are just its messengers.</p>
+      <div class="product-nami">🐾 "She ate four of these. Not destroyed — ate. KONG survived. KONG always survives."</div>
+      <div class="product-price">from $13.99</div>
+      <div class="product-retailer">via Chewy</div>
+      <!-- AFFILIATE LINK: Replace href with your Chewy CJ Affiliate tracked URL -->
+      <a class="shop-btn" href="https://www.chewy.com/kong-classic-dog-toy/dp/31088" target="_blank" rel="noopener noreferrer">SHOP ON CHEWY →</a>
     </div>
+
+    <!-- PRODUCT 3: Ruffwear Quencher Bowl -->
     <div class="product-card">
-      <div class="badge">LIMITED</div>
-      <span class="product-emoji">💎</span>
-      <div class="product-name">Diamond Snout™</div>
-      <p class="product-desc">Only 3 made. Each one is exactly like the others. Comes with a certificate of authenticity signed by "Dr. Nami, Dog Expert." Nami is our dog.</p>
-      <div class="product-price">$499.99</div>
-      <div class="product-flavors">1 remaining!</div>
-      <br>
-      <button class="cta-btn" style="font-size:1rem; padding:10px 20px;" onclick="addToCart('Diamond Snout™', 499.99, '💎')">ADD TO CART</button>
+      <div class="badge green">TRAIL ESSENTIAL</div>
+      <span class="product-emoji">🥣</span>
+      <div class="product-name">Ruffwear Quencher Bowl</div>
+      <p class="product-desc">Collapsible. Clips to your pack. Holds enough water for a medium dog who is too proud to admit she's thirsty. Nami won't drink from it if you're watching. Look away. She'll drink the whole thing.</p>
+      <div class="product-nami">🐾 "She drank from a creek three feet away and then used the bowl. Classic Nami."</div>
+      <div class="product-price">from $17.95</div>
+      <div class="product-retailer">via Ruffwear (AvantLink)</div>
+      <!-- AFFILIATE LINK: Replace href with your AvantLink tracked URL for Ruffwear -->
+      <a class="shop-btn" href="https://ruffwear.com/products/quencher-bowl" target="_blank" rel="noopener noreferrer">SHOP RUFFWEAR →</a>
     </div>
+
+    <!-- PRODUCT 4: Chuckit! -->
+    <div class="product-card">
+      <div class="badge">7 LOST &amp; COUNTING</div>
+      <span class="product-emoji">🟠</span>
+      <div class="product-name">Chuckit! Ultra Ball + Launcher</div>
+      <p class="product-desc">Nami retrieves this ball approximately 40% of the time. The other 60% begins a search party. We've lost 7 balls across 4 ecosystems. Still purchasing. We have accepted this as a lifestyle.</p>
+      <div class="product-nami">🐾 "Fetch success rate: 40%. Loss rate: 60%. Fun rate: 100%. The math checks out."</div>
+      <div class="product-price">from $10.99</div>
+      <div class="product-retailer">via Chewy</div>
+      <!-- AFFILIATE LINK: Replace href with your Chewy CJ Affiliate tracked URL -->
+      <a class="shop-btn" href="https://www.chewy.com/chuckit-ultra-fetch-stick-dog-toy/dp/54087" target="_blank" rel="noopener noreferrer">SHOP ON CHEWY →</a>
+    </div>
+
+    <!-- PRODUCT 5: BarkBox -->
+    <div class="product-card featured">
+      <div class="badge gold">✨ NAMI ACTUALLY LIKES THIS</div>
+      <span class="product-emoji">📦</span>
+      <div class="product-name">BarkBox Monthly Subscription</div>
+      <p class="product-desc">A curated box of themed toys and treats arrives every month. Nami hears the delivery truck from 3 houses away. We have never seen her more motivated. This is her favorite day of the month. She tries to hide it. She cannot hide it.</p>
+      <div class="product-nami">🐾 "First box: she destroyed 2 toys in 4 minutes. That is a record. That is also a 10/10."</div>
+      <div class="product-price">from $23/mo</div>
+      <div class="product-retailer">via BarkBox (direct)</div>
+      <!-- AFFILIATE LINK: Replace href with your BarkBox referral/affiliate link -->
+      <a class="shop-btn" href="https://www.barkbox.com/" target="_blank" rel="noopener noreferrer">GET BARKBOX →</a>
+    </div>
+
+    <!-- PRODUCT 6: Outward Hound Hiking Pack -->
+    <div class="product-card">
+      <div class="badge">SHE CARRIES HER OWN SNACKS NOW</div>
+      <span class="product-emoji">🎒</span>
+      <div class="product-name">Outward Hound Approach Pack</div>
+      <p class="product-desc">A backpack for dogs. Your dog carries water, treats, and their own existential weight. Nami walked out of the house wearing this with the confidence of a dog who has never made a bad decision. We were proud.</p>
+      <div class="product-nami">🐾 "She carried her own poop bags. She didn't know. We told her later. She didn't care."</div>
+      <div class="product-price">from $32.95</div>
+      <div class="product-retailer">via Outward Hound / Amazon</div>
+      <!-- AFFILIATE LINK: Replace href with your Amazon Associates or Outward Hound affiliate link -->
+      <a class="shop-btn" href="https://www.outwardhound.com/approach-dog-backpack" target="_blank" rel="noopener noreferrer">SHOP OUTWARD HOUND →</a>
+    </div>
+
+    <!-- DIVIDER: HUMAN GEAR -->
+    <div class="grid-divider">
+      <div class="grid-divider-line"></div>
+      <div class="grid-divider-label">🧑 HUMAN GEAR (ETHAN'S PICKS)</div>
+      <div class="grid-divider-line"></div>
+    </div>
+
+    <!-- PRODUCT 7: Hydro Flask -->
+    <div class="product-card">
+      <div class="badge green">ETHAN USES THIS DAILY</div>
+      <span class="product-emoji">💧</span>
+      <div class="product-name">Hydro Flask 32oz Wide Mouth</div>
+      <p class="product-desc">Keeps water cold for 24 hours. Nami drinks from puddles, streams, and whatever's in the gutter and is completely fine. You are, apparently, more fragile. This is for you. You deserve cold water. You're doing great.</p>
+      <div class="product-nami">🐾 "Nami sniffed it. No reaction. High praise."</div>
+      <div class="product-price">from $44.95</div>
+      <div class="product-retailer">via REI (AvantLink)</div>
+      <!-- AFFILIATE LINK: Replace href with your REI AvantLink affiliate URL -->
+      <a class="shop-btn" href="https://www.rei.com/product/248799/hydro-flask-32-oz-wide-mouth-water-bottle" target="_blank" rel="noopener noreferrer">SHOP ON REI →</a>
+    </div>
+
+    <!-- PRODUCT 8: Chewy Auto-Ship -->
+    <div class="product-card">
+      <div class="badge">SET IT & FORGET IT</div>
+      <span class="product-emoji">🛒</span>
+      <div class="product-name">Chewy Autoship</div>
+      <p class="product-desc">Food, treats, and supplies delivered on a schedule you set. Never run out of food while Nami stares at her empty bowl in silent, devastating judgment. We have been stared at. It is not pleasant. Autoship prevents this.</p>
+      <div class="product-nami">🐾 "The food arrives before Nami notices it's gone. She still judges us. She just judges us about other things."</div>
+      <div class="product-price">up to 35% off</div>
+      <div class="product-retailer">via Chewy</div>
+      <!-- AFFILIATE LINK: Replace href with your Chewy CJ Affiliate tracked URL -->
+      <a class="shop-btn" href="https://www.chewy.com/app/content/autoship" target="_blank" rel="noopener noreferrer">SHOP ON CHEWY →</a>
+    </div>
+
   </div>
 </div>
 </section>
@@ -1481,16 +1234,15 @@
   <p class="section-label">WEAR YOUR QUESTIONABLE LIFE CHOICES</p>
   <h2 class="section-title">Official Dog Cigarettes™ Merch 🧢</h2>
   <p style="text-align:center; max-width:560px; margin:0 auto 36px; color:var(--brown); font-size:0.9rem; line-height:1.6;">
-    Now you can advertise this brand to confused strangers in real life. All merch is for humans —
-    Nami refuses to wear clothing and has made that very clear.
+    The cigarettes were fake. The merch is real. Nami refuses to wear clothing and has made that very clear.
+    All items are for humans, who have less dignity and more credit cards.
   </p>
   <div class="merch-grid">
-
-    <div class="merch-card" data-merch="tshirt">
+    <div class="merch-card">
       <div class="merch-visual">👕<span class="merch-tag gold">BESTSELLER</span></div>
       <div class="merch-body">
         <div class="merch-name">"A Dog's Best Friend" Tee</div>
-        <div class="merch-desc">Soft cotton tee with Nami's disappointed face screen-printed over the slogan. People will ask. You won't be able to explain.</div>
+        <div class="merch-desc">Soft cotton tee with Nami's disappointed face. People will ask what it means. You will not be able to explain.</div>
         <div class="merch-price"><s>$40</s> $24.99</div>
         <div class="merch-options" data-group="size">
           <button class="merch-opt selected" onclick="selectOption(this)">S</button>
@@ -1499,14 +1251,13 @@
           <button class="merch-opt" onclick="selectOption(this)">XL</button>
         </div>
       </div>
-      <button class="merch-buy" onclick="addMerch(this, 'Best Friend Tee', 24.99, '👕')">ADD TO CART</button>
+      <button class="merch-buy" onclick="alert('Merch shop coming soon! Email nami@dogcigarettes.com to reserve yours.')">COMING SOON</button>
     </div>
-
-    <div class="merch-card" data-merch="hat">
+    <div class="merch-card">
       <div class="merch-visual">🧢<span class="merch-tag">NEW</span></div>
       <div class="merch-body">
         <div class="merch-name">Smokin' Snout Dad Hat</div>
-        <div class="merch-desc">Embroidered paw-holding-a-cigarette logo. Adjustable strap fits all heads, including unusually confident ones.</div>
+        <div class="merch-desc">Embroidered paw-holding-a-cigarette logo. Fits all heads, including unusually confident ones.</div>
         <div class="merch-price">$22.99</div>
         <div class="merch-options" data-group="color">
           <button class="merch-opt selected" onclick="selectOption(this)">Brown</button>
@@ -1514,29 +1265,13 @@
           <button class="merch-opt" onclick="selectOption(this)">Yellow</button>
         </div>
       </div>
-      <button class="merch-buy" onclick="addMerch(this, 'Smokin Snout Dad Hat', 22.99, '🧢')">ADD TO CART</button>
+      <button class="merch-buy" onclick="alert('Merch shop coming soon! Email nami@dogcigarettes.com to reserve yours.')">COMING SOON</button>
     </div>
-
-    <div class="merch-card" data-merch="sticker">
-      <div class="merch-visual">🏷️<span class="merch-tag gold">$ STEAL</span></div>
-      <div class="merch-body">
-        <div class="merch-name">Sticker Pack (6)</div>
-        <div class="merch-desc">Six weatherproof vinyl stickers featuring Nami, Gerald, and four logos legal counsel told us not to describe.</div>
-        <div class="merch-price"><s>$12</s> $6.99</div>
-        <div class="merch-options" data-group="finish">
-          <button class="merch-opt selected" onclick="selectOption(this)">Glossy</button>
-          <button class="merch-opt" onclick="selectOption(this)">Matte</button>
-          <button class="merch-opt" onclick="selectOption(this)">Holographic</button>
-        </div>
-      </div>
-      <button class="merch-buy" onclick="addMerch(this, 'Sticker Pack (6)', 6.99, '🏷️')">ADD TO CART</button>
-    </div>
-
-    <div class="merch-card" data-merch="hoodie">
+    <div class="merch-card">
       <div class="merch-visual">🧥<span class="merch-tag">COZY</span></div>
       <div class="merch-body">
         <div class="merch-name">Pack-A-Day Hoodie</div>
-        <div class="merch-desc">Heavyweight fleece hoodie. Big front pocket — perfect for treats, hands, or a small confused dog who won't fit.</div>
+        <div class="merch-desc">Heavyweight fleece. Big front pocket — perfect for treats, hands, or a dog who won't fit but will try.</div>
         <div class="merch-price"><s>$70</s> $49.99</div>
         <div class="merch-options" data-group="size">
           <button class="merch-opt selected" onclick="selectOption(this)">S</button>
@@ -1545,74 +1280,58 @@
           <button class="merch-opt" onclick="selectOption(this)">XL</button>
         </div>
       </div>
-      <button class="merch-buy" onclick="addMerch(this, 'Pack-A-Day Hoodie', 49.99, '🧥')">ADD TO CART</button>
+      <button class="merch-buy" onclick="alert('Merch shop coming soon! Email nami@dogcigarettes.com to reserve yours.')">COMING SOON</button>
     </div>
-
-    <div class="merch-card" data-merch="mug">
-      <div class="merch-visual">☕<span class="merch-tag">FRAGILE</span></div>
-      <div class="merch-body">
-        <div class="merch-name">"I Heart My Dog's Habit" Mug</div>
-        <div class="merch-desc">11oz ceramic mug. Dishwasher safe, morally questionable. Holds coffee, tea, or quiet contemplation of your choices.</div>
-        <div class="merch-price">$15.99</div>
-        <div class="merch-options" data-group="style">
-          <button class="merch-opt selected" onclick="selectOption(this)">Classic</button>
-          <button class="merch-opt" onclick="selectOption(this)">Color-Change</button>
-        </div>
-      </div>
-      <button class="merch-buy" onclick="addMerch(this, 'Dogs Habit Mug', 15.99, '☕')">ADD TO CART</button>
-    </div>
-
-    <div class="merch-card" data-merch="tote">
+    <div class="merch-card">
       <div class="merch-visual">👜<span class="merch-tag gold">ECO</span></div>
       <div class="merch-body">
         <div class="merch-name">Canvas Tote of Shame</div>
-        <div class="merch-desc">Carry your groceries and your reputation. Reads "I Buy Cigarettes For My Dog" in tasteful serif. Reusable, like the guilt.</div>
+        <div class="merch-desc">Reads "I Buy Cigarettes For My Dog" in tasteful serif. Reusable, like the guilt.</div>
         <div class="merch-price">$18.99</div>
         <div class="merch-options" data-group="color">
           <button class="merch-opt selected" onclick="selectOption(this)">Natural</button>
           <button class="merch-opt" onclick="selectOption(this)">Black</button>
         </div>
       </div>
-      <button class="merch-buy" onclick="addMerch(this, 'Canvas Tote of Shame', 18.99, '👜')">ADD TO CART</button>
+      <button class="merch-buy" onclick="alert('Merch shop coming soon! Email nami@dogcigarettes.com to reserve yours.')">COMING SOON</button>
     </div>
-
   </div>
-  <p style="text-align:center; font-size:0.62rem; color:var(--brown); opacity:0.55; margin-top:28px; max-width:600px; margin-left:auto; margin-right:auto; line-height:1.5;">
-    All merch designs are original and were made in an afternoon. Sizes run "approximately." Colors may differ
-    from screen, reality, and one another. Nami is not legally a model and was not compensated. Gerald demanded royalties.
+  <p style="text-align:center; font-size:0.7rem; color:var(--brown); opacity:0.55; margin-top:28px; line-height:1.5;">
+    Merch store launching soon. Email <a href="mailto:nami@dogcigarettes.com" style="color:var(--brown);">nami@dogcigarettes.com</a> to get notified first.
+    Nami will not be reading the emails but Ethan will.
   </p>
 </div>
 </section>
 
-<!-- SCIENCE -->
-<section class="science" id="science">
+<!-- FIELD TESTS (was SCIENCE) -->
+<section class="fieldtests" id="fieldtests">
 <div class="container">
-  <p class="section-label">PEER-REVIEWED BY PEOPLE IN LAB COATS (HALLOWEEN COSTUMES)</p>
-  <h2 class="section-title">The Science is <em>Definitely</em> Real 🔬</h2>
+  <p class="section-label">PEER-REVIEWED BY ONE (1) DOG WITH STRONG OPINIONS</p>
+  <h2 class="section-title">Nami's Testing Methodology 🔬</h2>
   <div class="science-grid">
     <div class="science-card">
-      <div class="science-icon">🧠</div>
-      <h3>NeuroSniff Technology™</h3>
-      <p>Our proprietary NeuroSniff formula interacts with your dog's olfactory cortex to produce a sensation scientists call "a distinct smell"</p>
-      <p class="tiny">* Not a real technology. We just liked how it sounded. NeuroSniff™ is a trademark of Dog Cigarettes LLC which is not a real LLC, yet.</p>
+      <div class="science-icon">🐽</div>
+      <h3>The Sniff Test</h3>
+      <p>Nami sniffs it. If she sniffs it twice: promising. If she tries to eat it: 10/10. If she walks away: she's being dramatic. We ship it anyway.</p>
+      <p class="tiny">* Sniff tests conducted without IRB approval. Nami has no credentials. She's a dog.</p>
     </div>
     <div class="science-card">
-      <div class="science-icon">📊</div>
-      <h3>97% Paw-sitivity Rate</h3>
-      <p>In a double-blind study conducted in our backyard, 97% of dogs showed "some reaction" when presented with our product. The other 3% were asleep.</p>
-      <p class="tiny">* "Some reaction" includes walking away, sneezing, and one incident where Nami ate the entire box.</p>
+      <div class="science-icon">🏃</div>
+      <h3>The Resistance Index™</h3>
+      <p>We measure how long it takes to get gear ON Nami. Under 30 seconds: excellent design. Over 2 minutes: still excellent, Nami is just dramatic. She always comes around.</p>
+      <p class="tiny">* Nami once sat down for 4 minutes to protest a harness she now wears daily. Drama is not a quality indicator.</p>
     </div>
     <div class="science-card">
-      <div class="science-icon">🏥</div>
-      <h3>Zero Known Benefits</h3>
-      <p>Unlike our competitors who make dubious health claims, we're proud to offer a product with absolutely zero proven benefits. Honesty is our brand.</p>
-      <p class="tiny">* We consulted 0 veterinarians. We tried to call one once but hung up when they asked why.</p>
+      <div class="science-icon">💥</div>
+      <h3>The Destruction Index™</h3>
+      <p>How long does a toy survive Nami? Soft toys: 4 minutes average. KONG: indefinite. Rope toys: 11 minutes. If it outlasts Nami's first session, we recommend it.</p>
+      <p class="tiny">* The 4-minute record was set by a plush squirrel. The squirrel did not survive. It did not suffer.</p>
     </div>
     <div class="science-card">
-      <div class="science-icon">⚗️</div>
-      <h3>Clinically Adjacent™</h3>
-      <p>Our product has been described as "clinically adjacent" by our marketing team, which means it exists near a place where clinical things happen sometimes.</p>
-      <p class="tiny">* "Clinically adjacent" is a phrase we invented. We are very proud of it. Please do not look it up.</p>
+      <div class="science-icon">📋</div>
+      <h3>The Human Review</h3>
+      <p>We also read actual user reviews, check materials, and test things ourselves. Nami supervises this process from the couch. This is the most reliable part of our methodology.</p>
+      <p class="tiny">* Ethan does the reading. Nami does the quality-control napping. Both are essential.</p>
     </div>
   </div>
 </div>
@@ -1621,49 +1340,49 @@
 <!-- CHART -->
 <section class="chart-section">
 <div class="container">
-  <p class="section-label" style="color: var(--tan);">DATA WE MADE UP IN MICROSOFT EXCEL</p>
-  <h2 class="section-title">How We Compare to "The Competition" 📈</h2>
+  <p class="section-label" style="color: var(--tan);">DATA FROM NAMI'S PROPRIETARY SATISFACTION INDEX™</p>
+  <h2 class="section-title">How the Brands Stack Up 📈</h2>
   <div class="chart-wrapper">
     <div class="bar-row">
-      <div class="bar-label">Dog Cigarettes™</div>
+      <div class="bar-label">Ruffwear</div>
       <div class="bar-track">
-        <div class="bar-fill gold" data-width="98" style="width:0%">98% AMAZING</div>
+        <div class="bar-fill gold" data-width="96" style="width:0%">96% OUTSTANDING</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">Regular Treats</div>
+      <div class="bar-label">KONG</div>
       <div class="bar-track">
-        <div class="bar-fill gray" data-width="62" style="width:0%">62% ok</div>
+        <div class="bar-fill gold" data-width="94" style="width:0%">94% TRIED &amp; TRUE</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">Tennis Balls</div>
+      <div class="bar-label">BarkBox</div>
       <div class="bar-track">
-        <div class="bar-fill gray" data-width="71" style="width:0%">71% fine</div>
+        <div class="bar-fill green" data-width="91" style="width:0%">91% NAMI APPROVED</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">Belly Rubs</div>
+      <div class="bar-label">Outward Hound</div>
       <div class="bar-track">
-        <div class="bar-fill gray" data-width="45" style="width:0%">45% meh</div>
+        <div class="bar-fill gray" data-width="83" style="width:0%">83% SOLID</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">Your Love & Affection</div>
+      <div class="bar-label">Amazon Basics</div>
       <div class="bar-track">
-        <div class="bar-fill gray" data-width="22" style="width:0%">22% whatever</div>
+        <div class="bar-fill gray" data-width="67" style="width:0%">67% IT WORKS</div>
       </div>
     </div>
     <div class="bar-row">
-      <div class="bar-label">Walkies</div>
+      <div class="bar-label">Your Old Tennis Ball</div>
       <div class="bar-track">
-        <div class="bar-fill gray" data-width="15" style="width:0%">15% boring</div>
+        <div class="bar-fill gray" data-width="44" style="width:0%">44% SMELLS WEIRD</div>
       </div>
     </div>
     <p class="chart-note">
-      Chart based on proprietary DogSatisfaction Index™ (DSI). DSI is not a real index.
-      All values were chosen to make us look good. Margin of error: ±97%.
-      "The competition" was not consulted and does not know they are in this chart.
+      Rankings based on Nami's proprietary DogSatisfaction Index™ (DSI). DSI is conducted via sniffing and selective chewing.
+      Margin of error: ±Nami's mood. Brands were not consulted and do not know they're in this chart.
+      Ruffwear would probably be fine with it.
     </p>
   </div>
 </div>
@@ -1672,13 +1391,14 @@
 <!-- TESTIMONIALS -->
 <section class="testimonials" id="testimonials">
 <div class="container">
-  <p class="section-label">DEFINITELY REAL HUMANS WHO WROTE THESE THEMSELVES</p>
+  <p class="section-label">DEFINITELY REAL HUMANS WHO BOUGHT REAL THINGS</p>
   <h2 class="section-title">Dogs & Owners Are Obsessed 🐾</h2>
   <div class="testi-grid">
     <div class="testi-card">
       <div class="verified">✓ VERIFIED PURCHASE</div>
       <div class="testi-quote">"</div>
-      <p class="testi-text">My dog smoked an entire pack in 10 minutes! I interpreted this as a 5-star endorsement. I've since ordered 14 more boxes. My marriage has suffered.</p>
+      <div class="testi-product">RUFFWEAR FRONT RANGE HARNESS</div>
+      <p class="testi-text">My Golden sees the harness and runs to the door. He used to hide. I don't know what changed. I don't want to question it. We've hiked 200 miles this year. He's thriving. I'm tired. 5 stars.</p>
       <div class="testi-author">
         <div class="testi-avatar">👨</div>
         <div>
@@ -1691,25 +1411,27 @@
     <div class="testi-card">
       <div class="verified">✓ VERIFIED PURCHASE</div>
       <div class="testi-quote">"</div>
-      <p class="testi-text">As a dog, I cannot type, read, or understand commerce. Nevertheless, I love these. I am happy and can now be trusted with loaded firearms! Thanks dog cigarettes!</p>
+      <div class="testi-product">BARKBOX MONTHLY</div>
+      <p class="testi-text">The box arrives. My dog goes absolutely feral. In a good way. She destroyed two toys in under five minutes and then carried the empty box around for an hour. She is 11 years old. BarkBox found her fountain of youth.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👩</div>
+        <div>
+          <div class="testi-name">Sarah M., Accidental Convert</div>
+          <div class="testi-title">Lab Mix Mom, Portland OR</div>
+          <div class="testi-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="verified">✓ VERIFIED PURCHASE</div>
+      <div class="testi-quote">"</div>
+      <div class="testi-product">KONG CLASSIC</div>
+      <p class="testi-text">As a dog, I cannot type, use credit cards, or understand commerce. Nevertheless, I endorse this product fully. The peanut butter situation alone warrants 5 stars. I have eaten four of these. I am fine. Gerald out.</p>
       <div class="testi-author">
         <div class="testi-avatar">🐕</div>
         <div>
           <div class="testi-name">Gerald (The Dog)</div>
           <div class="testi-title">Chief Product Tester, Dog Cigarettes HQ</div>
-          <div class="testi-stars">★★★★☆</div>
-        </div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="verified">✓ VERIFIED PURCHASE</div>
-      <div class="testi-quote">"</div>
-      <p class="testi-text">I'm a vet and I categorically did NOT endorse this product. Please stop putting me on your website. The cease and desist is in the mail. Also your dog seems fine.</p>
-      <div class="testi-author">
-        <div class="testi-avatar">👩‍⚕️</div>
-        <div>
-          <div class="testi-name">Dr. Linda Farrow, DVM</div>
-          <div class="testi-title">Veterinarian (Against Her Will)</div>
           <div class="testi-stars">★★★★★</div>
         </div>
       </div>
@@ -1717,20 +1439,8 @@
     <div class="testi-card">
       <div class="verified">✓ VERIFIED PURCHASE</div>
       <div class="testi-quote">"</div>
-      <p class="testi-text">I bought these as a joke for my friend's birthday. She cried laughing. Her Labrador ate three of them. The vet said he's fine. We now have standing orders. Life is strange.</p>
-      <div class="testi-author">
-        <div class="testi-avatar">👩</div>
-        <div>
-          <div class="testi-name">Michelle K., Accidental Customer</div>
-          <div class="testi-title">Now a "DogCigs Evangelist" (her words)</div>
-          <div class="testi-stars">★★★★★</div>
-        </div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="verified">✓ VERIFIED PURCHASE</div>
-      <div class="testi-quote">"</div>
-      <p class="testi-text">These changed my life. Specifically, they changed it by making me the person who bought cigarettes for a dog. That's my legacy now. No refunds on life decisions.</p>
+      <div class="testi-product">CHUCKIT! ULTRA BALL</div>
+      <p class="testi-text">The launcher means I can throw farther than my arm allows. My dog now judges me significantly less. We have lost 6 balls. I ordered 12 replacements. This is just my life now and I've made peace with it.</p>
       <div class="testi-author">
         <div class="testi-avatar">👴</div>
         <div>
@@ -1743,13 +1453,28 @@
     <div class="testi-card">
       <div class="verified">✓ VERIFIED PURCHASE</div>
       <div class="testi-quote">"</div>
-      <p class="testi-text">I work in branding and I've never seen anything this unhinged. The audacity. The nerve. The sheer confidence of selling cigarettes to dogs! I respect it. I hate that I respect it.</p>
+      <div class="testi-product">HYDRO FLASK 32OZ</div>
+      <p class="testi-text">My dog drinks from the creek. I drink from the Hydro Flask. We are very different. We are both hydrated. We are both happy. The flask kept my water cold for 9 hours. My dog did not care. She drank from a puddle. We're fine.</p>
       <div class="testi-author">
-        <div class="testi-avatar">🧑‍💼</div>
+        <div class="testi-avatar">🧑‍🦱</div>
         <div>
-          <div class="testi-name">Alex P., Brand Strategist</div>
-          <div class="testi-title">Currently Rethinking Career</div>
+          <div class="testi-name">Michelle K., Outdoor Enthusiast</div>
+          <div class="testi-title">Trail Dog Mom, Denver CO</div>
           <div class="testi-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="verified">✓ VERIFIED PURCHASE</div>
+      <div class="testi-quote">"</div>
+      <div class="testi-product">GENERAL REVIEW</div>
+      <p class="testi-text">I'm back. Against my better judgment. I'm a vet. These products are genuinely good. The website is still chaotic. Your dog is probably fine. The harness is excellent. The KONG is excellent. Please stop tagging me in posts. Your dog seems healthy.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👩‍⚕️</div>
+        <div>
+          <div class="testi-name">Dr. Linda Farrow, DVM</div>
+          <div class="testi-title">Veterinarian (Back, Reluctantly)</div>
+          <div class="testi-stars">★★★★☆</div>
         </div>
       </div>
     </div>
@@ -1757,42 +1482,44 @@
 </div>
 </section>
 
-<!-- PROMO -->
+<!-- PROMO / DEALS -->
 <section class="promo" id="promo">
 <div class="container">
-  <p class="section-label" style="color: rgba(255,255,255,0.5);">ABSOLUTELY UNHINGED DEALS</p>
-  <h2 class="section-title">Today's Promotions 🎉</h2>
+  <p class="section-label" style="color: rgba(255,255,255,0.5);">REAL DEALS, ACTUALLY</p>
+  <h2 class="section-title">Current Offers 🎉</h2>
   <div class="promo-grid">
     <div class="promo-card">
       <div class="promo-icon">📦</div>
-      <h3>Buy 2, Get 1 Free*</h3>
-      <p>Buy two boxes of Dog Cigarettes, get one more box of Dog Cigarettes that your dogs needs.</p>
-      <p style="font-size:0.6rem; opacity:0.4; margin-top:8px;">*of equal or lesser pointlessness</p>
+      <h3>BarkBox First Box</h3>
+      <p>First box deals frequently available through our link. Nami gets the treats. We get the commission. Everyone wins except Nami, who won't share.</p>
+      <!-- AFFILIATE LINK: Replace with BarkBox affiliate/referral link -->
+      <a class="promo-shop-btn" href="https://www.barkbox.com/" target="_blank" rel="noopener noreferrer">GET THE DEAL →</a>
     </div>
     <div class="promo-card">
-      <div class="promo-icon">🐾</div>
-      <h3>Paw Pass Membership</h3>
-      <p>For $9.99/month, get monthly boxes of dog cigarettes, a newsletter your dog can't read, and a membership card.</p>
-      <p style="font-size:0.6rem; opacity:0.4; margin-top:8px;">Cancel anytime! (You won't. The form is very confusing.)</p>
+      <div class="promo-icon">🎒</div>
+      <h3>Ruffwear Seasonal Sales</h3>
+      <p>Ruffwear runs sales throughout the year. We post them here when they happen. Sign up below and we'll tell Nami. She'll tell no one. We'll tell you.</p>
+      <!-- AFFILIATE LINK: Replace with your Ruffwear AvantLink affiliate URL -->
+      <a class="promo-shop-btn" href="https://ruffwear.com/collections/sale" target="_blank" rel="noopener noreferrer">SHOP SALE →</a>
     </div>
     <div class="promo-card">
-      <div class="promo-icon">🎁</div>
-      <h3>Gift Bundle</h3>
-      <p>"The Perfect Gift for Someone You're Confused By." Comes with a card that says "I saw this and thought of you." Figure that out.</p>
-      <p style="font-size:0.6rem; opacity:0.4; margin-top:8px;">Ships in eco-friendly box (because we felt guilty)</p>
+      <div class="promo-icon">🛒</div>
+      <h3>Chewy New Customer Deal</h3>
+      <p>New Chewy customers get money off their first order. We can't say the exact amount because it changes. Our link will show you. Nami approves of this.</p>
+      <!-- AFFILIATE LINK: Replace with your Chewy CJ Affiliate tracked URL -->
+      <a class="promo-shop-btn" href="https://www.chewy.com/" target="_blank" rel="noopener noreferrer">SHOP CHEWY →</a>
     </div>
   </div>
-  <p style="margin-bottom: 12px; font-size: 1.1rem; opacity: 0.9; letter-spacing: 2px; font-family: 'Bebas Neue', sans-serif;">USE CODE AT CHECKOUT:</p>
+
+  <p style="margin-bottom: 12px; font-size: 1.1rem; opacity: 0.9; letter-spacing: 2px; font-family: 'Bebas Neue', sans-serif;">NEWSLETTER SUBSCRIBER CODE:</p>
   <button class="promo-code" onclick="copyCode()">GOODBOY20</button>
-  <div id="copyToast" class="copy-toast">📋 Copied! 20% off... we'll see.</div>
+  <div id="copyToast" class="copy-toast">📋 Copied! Sign up below to activate it.</div>
   <br><br>
   <p class="promo-fine">
-    Promo code GOODBOY20 applies 20% discount to your order. Offer expires whenever we feel like it,
-    which might be already. Not valid with other offers, in alternate dimensions, or on Tuesdays
-    (we've had bad luck on Tuesdays). Dog Cigarettes LLC is not a real LLC. This is a real product
-    in the sense that it can be shipped, but not in the sense that it makes any sense.
-    By using this code you acknowledge that you are aware this is absurd and you're doing it anyway.
-    We respect that. You are one of us now.
+    GOODBOY20 is a discount code for newsletter subscribers. Sign up below to see what it unlocks — we rotate what it applies to.
+    Not valid in alternate dimensions or on Tuesdays (we've had bad luck on Tuesdays).
+    Affiliate disclosure: links on this page may earn us a commission at no cost to you.
+    Nami earns zero. Nami is doing fine.
   </p>
 </div>
 </section>
@@ -1803,60 +1530,55 @@
   <p class="section-label">YOU HAVE QUESTIONS. WE HAVE ANSWERS. SORT OF.</p>
   <h2 class="section-title">Frequently Asked Questions 🤔</h2>
   <div class="faq-list">
-     <div class="faq-item" onclick="toggleFaq(this)">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Wait — are you selling cigarettes? <span class="arrow">▼</span></div>
+      <div class="faq-a">No. We never really were, technically. The cigarettes were a bit. They were very funny. We pivoted. The brand name stays because we worked hard on it and Nami is on the logo and changing that felt wrong.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Are these affiliate links? <span class="arrow">▼</span></div>
+      <div class="faq-a">Yes. Disclosed at the top of the page, as the FTC requires. We earn a small commission when you buy through our links at no extra cost to you. Nami receives no compensation. She doesn't know what money is. She knows what treats are. This is sufficient.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Did Nami actually test all of this? <span class="arrow">▼</span></div>
+      <div class="faq-a">She was present. She sniffed most of it. She wore the harness on 200+ miles of trails. She destroyed 4 KONGs (ate them, specifically — they did not break, she just ate them). She carried her own snacks in the backpack. She drank from the collapsible bowl exactly once and then went back to drinking from creeks. We stand behind all of these endorsements.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">Which affiliate programs are you part of? <span class="arrow">▼</span></div>
+      <div class="faq-a">Ruffwear via AvantLink, Chewy via CJ Affiliate, BarkBox direct, REI via AvantLink, and Amazon Associates as a fallback. We disclose this because Nami insisted. She did not. She was asleep. We insisted because it's the right thing to do.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">What happened to the Dog Cigarettes? <span class="arrow">▼</span></div>
+      <div class="faq-a">Spiritually, they are still with us. The brand is still Dog Cigarettes™. Nami is still the Chief Everything Officer. The cigarettes were never real, so in some sense they never left. They exist now in the same place where all good jokes go: the footer.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Is Ethan single??? <span class="arrow">▼</span></div>
-      <div class="faq-a">Feel free to email and ask him out to dinner, he really likes thai food.</div>
+      <div class="faq-a">Yes. He goes on hikes with his dog. He has a working affiliate website. He likes Thai food. This is all the information we can legally provide.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Are these safe for dogs? <span class="arrow">▼</span></div>
-      <div class="faq-a">They are cigarettes for dogs. They are consumable. That said, Nami was fine. Nami is always fine. Nami is invincible.</div>
-    </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Do they come in different flavors? <span class="arrow">▼</span></div>
-      <div class="faq-a">We list flavors like "Truffle" and "Artisan" on the packaging but they are all the same. The flavor is CIGARETTE. Dogs allegedly prefer this. We cannot confirm or deny. Nami did eat one once. She seemed fine (see above re: Nami's invincibility).</div>
-    </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Why does my dog not seem interested? <span class="arrow">▼</span></div>
-      <div class="faq-a">We have never had this problem.</div>
+      <div class="faq-q">Can I suggest a product for Nami to review? <span class="arrow">▼</span></div>
+      <div class="faq-a">Yes! Email us at nami@dogcigarettes.com. Nami cannot read but Ethan will forward relevant ones to her via the physical act of putting it on the floor in front of her. Her response will be shared. Usually her response is sniffing and walking away. We will report faithfully.</div>
     </div>
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">Is this a real company? <span class="arrow">▼</span></div>
-      <div class="faq-a">Define "real." The website is real. Your desire to buy these is real. Our shipping department (our couch) is real. Dog Cigarettes LLC has not been formally incorporated, but our passion is formally incorporated deeply in our hearts. We are real in all the ways that matter.</div>
-    </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Can I return them? <span class="arrow">▼</span></div>
-      <div class="faq-a">We offer a 30-day return policy for products that have "not been sniffed." If your dog sniffed it, it is considered used. If your dog did not sniff it, your dog lacks curiosity and we feel that is on you. Refunds are processed within 5-7 business days or whenever we remember, whichever comes last.</div>
-    </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">What are the ingredients? <span class="arrow">▼</span></div>
-      <div class="faq-a">Cigarettes</div>
-    </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Is anything actually in stock? <span class="arrow">▼</span></div>
-      <div class="faq-a">Great question. No. Everything is perpetually out of stock the moment you try to pay. This is not a bug. This is the entire business model. We are, technically, a museum.</div>
-    </div>
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">Do vets recommend this? <span class="arrow">▼</span></div>
-      <div class="faq-a">Zero vets recommend this. We tried. Dr. Linda Farrow (see testimonials) was the closest we got and she sent a cease and desist. We are proud to be transparent about this. Zero vet recommendations is, we believe, a form of honesty that sets us apart in the market. Most products claim endorsements they don't have. We loudly confirm we have none.</div>
+      <div class="faq-a">The website is real. The affiliate links are real. The recommendations are real. The commission is real. The cigarettes were fake. Nami is real. Ethan is real. Dog Cigarettes LLC is "in formation." We are real in all the ways that generate revenue. That is the most real kind of real.</div>
     </div>
   </div>
 </div>
 </section>
+
 <!-- CONTACT -->
 <section class="contact" id="contact">
 <div class="container">
   <p class="section-label">WE ARE TECHNICALLY REACHABLE</p>
   <h2 class="section-title">Get In Touch 🐾</h2>
   <div class="contact-grid">
- 
-    <!-- LEFT: Info blocks -->
     <div class="contact-info-block">
       <div class="contact-info-item">
         <div class="contact-info-icon">📍</div>
         <div>
           <div class="contact-info-label">Headquarters</div>
           <div class="contact-info-value">The Porch, Ethan's House</div>
-          <div class="contact-info-caveat">We are not accepting visitors, unless you're cute.</div>
+          <div class="contact-info-caveat">We are not accepting visitors, unless you're cute and have a dog.</div>
         </div>
       </div>
       <div class="contact-info-item">
@@ -1864,15 +1586,15 @@
         <div>
           <div class="contact-info-label">Email (Real)</div>
           <div class="contact-info-value"><a href="mailto:nami@dogcigarettes.com">nami@dogcigarettes.com</a></div>
-          <div class="contact-info-caveat">Monitored by Ethan when he remembers. Response not guaranteed. Nami sometimes sits on the laptop.</div>
+          <div class="contact-info-caveat">Monitored by Ethan. Response not guaranteed. Nami sometimes sits on the laptop.</div>
         </div>
       </div>
       <div class="contact-info-item">
-        <div class="contact-info-icon">📞</div>
+        <div class="contact-info-icon">🤝</div>
         <div>
-          <div class="contact-info-label">Phone</div>
-          <div class="contact-info-value">We do not have a phone line.</div>
-          <div class="contact-info-caveat">We looked into it. It was very expensive. Please just email us. Or text Ethan. He'll figure it out.</div>
+          <div class="contact-info-label">Partnerships & Affiliate Inquiries</div>
+          <div class="contact-info-value"><a href="mailto:nami@dogcigarettes.com">nami@dogcigarettes.com</a></div>
+          <div class="contact-info-caveat">Brand collabs, product review requests, affiliate program questions. We read these first. Nami reads none of these.</div>
         </div>
       </div>
       <div class="contact-info-item">
@@ -1888,8 +1610,6 @@
         3–5 business days, or when Nami moves off the laptop. Whichever is later. Usually Nami.
       </div>
     </div>
- 
-    <!-- RIGHT: Contact form -->
     <div class="contact-form-wrap">
       <div class="contact-field-row">
         <div class="contact-field-group">
@@ -1905,14 +1625,14 @@
         <label>Reason for Contact</label>
         <select id="contactReason">
           <option value="">Select a reason...</option>
+          <option value="collab">Brand collaboration / partnership</option>
+          <option value="review">Product review request</option>
+          <option value="affiliate">Affiliate program question</option>
           <option value="ethan">The co-founder (Ethan) is kinda cute...</option>
-          <option value="nami">The co-founder (Ethan) is really cute...</option>
-          <option value="order">The co-founder (Ethan) is handsome...</option>
-          <option value="press">The co-founder (Ethan) is soooo handsome...</option>
-          <option value="legal">The co-founder (Ethan) should cook me dinner...</option>
-          <option value="vet">The co-founder (Ethan) should be my sugar baby...</option>
-          <option value="collab">Collaboration / partnership</option>
-          <option value="existential">Existential concern about this product</option>
+          <option value="ethan2">The co-founder (Ethan) is really cute...</option>
+          <option value="suggestion">Product suggestion for Nami to review</option>
+          <option value="legal">Legal matter (cease & desist)</option>
+          <option value="existential">Existential concern about this pivot</option>
           <option value="other">Other (Nami is curious)</option>
         </select>
       </div>
@@ -1930,267 +1650,86 @@
         We are not liable for how the dog reacts. The dog's reaction is not legally binding feedback.
       </p>
     </div>
- 
   </div>
 </div>
 </section>
- 
+
 <!-- NEWSLETTER -->
 <section class="newsletter">
   <h2>Join the Pack 🐺</h2>
-  <p>Get updates on new flavors, new science, and exclusive deals (always available).</p>
+  <p>New gear picks, actual deals, Nami field test updates, and the GOODBOY20 code — in your inbox.</p>
   <div class="email-form">
     <input type="email" placeholder="your@email.com" id="emailInput">
     <button onclick="subscribeEmail()">SUBSCRIBE</button>
   </div>
   <p style="font-size: 0.6rem; opacity: 0.3; margin-top: 16px; max-width: 400px; margin-left: auto; margin-right: auto; line-height: 1.5;">
-    By subscribing you agree to receive emails about cardboard tubes and nothing else.
-    We will not sell your data. We will however read it aloud to Gerald.
-    You can unsubscribe anytime. We will send a farewell email from Gerald's perspective.
-    It will be very moving. You will resubscribe.
+    No spam. Just gear picks and Nami updates. We will not sell your data.
+    We will however read it aloud to Gerald. You can unsubscribe anytime.
+    We will send a farewell email from Nami's perspective. It will be very moving. You will resubscribe.
   </p>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p><strong>DOG CIGARETTES™</strong> — A Dog's Best Friend &nbsp;|&nbsp; Est. 2026 &nbsp;|&nbsp; Soon To Be, LLC</p>
+  <p><strong>DOG CIGARETTES™</strong> — Gear for Dogs (& Their Humans) &nbsp;|&nbsp; Est. 2026 &nbsp;|&nbsp; Soon To Be, LLC</p>
   <br>
   <p>
-    ⚠️ WARNING: Dog Cigarettes are not cigarettes. They do not contain tobacco, nicotine, or anything a dog (or human) should smoke, eat, or use medicinally.
-    We are not responsible for what your dog does with these. We are not responsible for what YOU do with these.
-    Do not give these to children, dogs, cats, birds, or anyone who would take them seriously.
-    Gerald the Dog is a real dog and a bad product tester. The "Dog's Choice Award™" was designed in Canva.
-    "NeuroSniff Technology™" is not real. None of the awards are real. Some of the testimonials are written by our team.
-    Dr. Linda Farrow did not endorse this product and has asked us to remove her name, which we have done in the testimonials section (we moved it slightly).
-    For actual dog health products, please consult a real veterinarian. This page is parody. Have a great day.
+    <strong>Affiliate Disclosure:</strong> Dog Cigarettes™ participates in affiliate programs including Amazon Associates, Ruffwear (AvantLink),
+    Chewy (CJ Affiliate), BarkBox, and REI (AvantLink). We earn a small commission when you shop through our links,
+    at no additional cost to you. Nami receives zero compensation. She doesn't know what money is. She knows what treats are. This is sufficient.
+  </p>
+  <br>
+  <p>
+    ⚠️ This website started as a parody. It is now also a real affiliate site. Both things are true.
+    Nami is a real dog and a real (if skeptical) product tester. Gerald the Dog is also real and also a bad product tester.
+    Dr. Linda Farrow did not endorse this website and has asked to be removed. We moved her to the FAQ. We regret nothing.
+    For actual veterinary advice, please consult an actual vet. Have a great day.
   </p>
   <br>
   <p style="font-size: 0.55rem;">
-    *#1 Ranking based on internal survey of 1 dog (Nami) who was asleep.
-    †Dog-tested means Gerald was in the room.
-    **100% Dog-shaped refers to our logo, not the product.
-    © 2024 Dog Cigarettes™. All rights absurd.
+    *Nami's ratings based on a proprietary system of sniffing, ignoring, and occasional destruction.
+    †Dog-tested means Gerald was in the room. ††7/10 is Nami's highest published rating.
+    © 2026 Dog Cigarettes™. All rights absurd.
   </p>
 </footer>
 
-<!-- ── CART DRAWER ── -->
-<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
-  <div class="cart-header">
-    <h3>🛒 Your Cart</h3>
-    <button class="cart-close" onclick="closeCart()" aria-label="Close cart">×</button>
-  </div>
-  <div class="cart-items" id="cartItems">
-    <!-- items injected here -->
-  </div>
-  <div class="cart-footer">
-    <div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
-    <div class="cart-row"><span>Shipping</span><span id="cartShipping">Calculated at checkout*</span></div>
-    <div class="cart-row total"><span>Total</span><span class="amt" id="cartTotal">$0.00</span></div>
-    <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" disabled>PROCEED TO CHECKOUT</button>
-    <p class="cart-fine">*Shipping is free on orders over $9,999. You are almost there, probably.</p>
-  </div>
-</aside>
-
-<!-- ── OUT OF STOCK MODAL ── -->
-<div class="oos-overlay" id="oosOverlay">
-  <div class="oos-modal" role="dialog" aria-modal="true" aria-labelledby="oosTitle">
-    <div class="oos-top">
-      <div class="oos-emoji">🚫🐶</div>
-      <h2 id="oosTitle">Out of Stock!</h2>
-    </div>
-    <div class="oos-body">
-      <p class="lead">We are so sorry. Every single item is, was, and forever shall be out of stock.</p>
-      <p>You did everything right. You added items to your cart. You believed in us. But the moment you reached for your wallet, the universe intervened — as it always does, at exactly this step.</p>
-      <p>Your cart has been lovingly preserved. Nami has been notified. She remains unbothered.</p>
-      <button class="oos-btn" onclick="closeOos()">FINE. I UNDERSTAND.</button>
-      <p class="oos-fine">No payment was taken because no payment system exists. This was never going to work. We warned you in the FAQ.</p>
-    </div>
-  </div>
-</div>
-
 <script>
-  // ── CART STATE ──
-  // Each line item: { id, name, price, emoji, variant, qty }
-  let cart = [];
-
-  function lineId(name, variant) {
-    return name + '||' + (variant || '');
-  }
-
-  function addToCart(name, price, emoji, variant) {
-    const id = lineId(name, variant);
-    const existing = cart.find(i => i.id === id);
-    if (existing) {
-      existing.qty++;
-    } else {
-      cart.push({ id, name, price, emoji, variant: variant || '', qty: 1 });
-    }
-    renderCart();
-    flashCartButton();
-  }
-  function submitContact() {
-  const name = document.getElementById('contactName').value.trim();
-  const email = document.getElementById('contactEmail').value.trim();
-  const reason = document.getElementById('contactReason').value;
-  const message = document.getElementById('contactMessage').value.trim();
-  const dogName = document.getElementById('contactDogName').value.trim();
-
-  if (!name) { alert("We need a name. Or your dog's name. Any name. We're not picky."); return; }
-  if (!email || !email.includes('@')) { alert("Please enter a valid email. We can't reply to nothing. We tried once. It didn't work."); return; }
-  if (!reason) { alert("Please select a reason. We like to be emotionally prepared."); return; }
-  if (!message) { alert("You opened the form and left the message blank. That's very mysterious. Please write something."); return; }
-
-  const reasonLabels = {
-    ethan: "The co-founder (Ethan) is kinda cute...",
-    nami: "Question specifically about Nami",
-    order: "Question about my order",
-    press: "Press / media inquiry",
-    legal: "Legal matter (cease & desist)",
-    vet: "I am a vet and I am upset",
-    collab: "Collaboration / partnership",
-    existential: "Existential concern about this product",
-    other: "Other"
-  };
-
-  const dogLine = dogName ? `\nMy dog's name: ${dogName}` : '';
-
-  const subject = encodeURIComponent(`[Dog Cigarettes™] ${reasonLabels[reason] || 'Contact Form'}`);
-  const body = encodeURIComponent(
-    `From: ${name} (${email})\nReason: ${reasonLabels[reason]}\n${dogLine}\n\n${message}`
-  );
-
-  window.location.href = `mailto:nami@dogcigarettes.com?subject=${subject}&body=${body}`;
-}
-
-  // Merch add — reads the currently selected option from the card
-  function addMerch(btn, name, price, emoji) {
-    const card = btn.closest('.merch-card');
-    const group = card.querySelector('.merch-options');
-    let variant = '';
-    if (group) {
-      const sel = group.querySelector('.merch-opt.selected');
-      const label = group.dataset.group || 'option';
-      if (sel) variant = label.charAt(0).toUpperCase() + label.slice(1) + ': ' + sel.textContent;
-    }
-    addToCart(name, price, emoji, variant);
-    const original = btn.textContent;
-    btn.textContent = '✓ ADDED!';
-    btn.style.background = '#27ae60';
-    btn.style.color = 'white';
-    setTimeout(() => { btn.textContent = original; btn.style.background = ''; btn.style.color = ''; }, 1300);
-  }
-
+  // ── OPTION SELECTOR (MERCH) ──
   function selectOption(btn) {
     const group = btn.parentElement;
     group.querySelectorAll('.merch-opt').forEach(o => o.classList.remove('selected'));
     btn.classList.add('selected');
   }
 
-  function changeQty(id, delta) {
-    const item = cart.find(i => i.id === id);
-    if (!item) return;
-    item.qty += delta;
-    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
-    renderCart();
+  // ── CONTACT FORM ──
+  function submitContact() {
+    const name = document.getElementById('contactName').value.trim();
+    const email = document.getElementById('contactEmail').value.trim();
+    const reason = document.getElementById('contactReason').value;
+    const message = document.getElementById('contactMessage').value.trim();
+    const dogName = document.getElementById('contactDogName').value.trim();
+    if (!name) { alert("We need a name. Or your dog's name. Any name. We're not picky."); return; }
+    if (!email || !email.includes('@')) { alert("Please enter a valid email. We can't reply to nothing. We tried once. It didn't work."); return; }
+    if (!reason) { alert("Please select a reason. We like to be emotionally prepared."); return; }
+    if (!message) { alert("You opened the form and left the message blank. That's very mysterious. Please write something."); return; }
+    const reasonLabels = {
+      collab: "Brand collaboration / partnership",
+      review: "Product review request",
+      affiliate: "Affiliate program question",
+      ethan: "The co-founder (Ethan) is kinda cute...",
+      ethan2: "The co-founder (Ethan) is really cute...",
+      suggestion: "Product suggestion for Nami to review",
+      legal: "Legal matter (cease & desist)",
+      existential: "Existential concern about this pivot",
+      other: "Other"
+    };
+    const dogLine = dogName ? `\nMy dog's name: ${dogName}` : '';
+    const subject = encodeURIComponent(`[Dog Cigarettes™] ${reasonLabels[reason] || 'Contact Form'}`);
+    const body = encodeURIComponent(
+      `From: ${name} (${email})\nReason: ${reasonLabels[reason]}\n${dogLine}\n\n${message}`
+    );
+    window.location.href = `mailto:nami@dogcigarettes.com?subject=${subject}&body=${body}`;
   }
-
-  function removeItem(id) {
-    cart = cart.filter(i => i.id !== id);
-    renderCart();
-  }
-
-  function cartItemCount() {
-    return cart.reduce((sum, i) => sum + i.qty, 0);
-  }
-
-  function renderCart() {
-    // count badge
-    document.getElementById('cartCount').textContent = cartItemCount();
-
-    const container = document.getElementById('cartItems');
-    const checkoutBtn = document.getElementById('checkoutBtn');
-
-    if (cart.length === 0) {
-      container.innerHTML = `
-        <div class="cart-empty">
-          <span class="big">🦴</span>
-          Your cart is empty.<br>
-          Nami is silently judging you.<br>
-          <span style="font-size:0.8rem; color:#bbb;">(She judges everyone. Don't take it personally.)</span>
-        </div>`;
-      checkoutBtn.disabled = true;
-    } else {
-      container.innerHTML = cart.map(i => `
-        <div class="cart-item">
-          <div class="cart-item-emoji">${i.emoji}</div>
-          <div class="cart-item-info">
-            <div class="cart-item-name">${i.name}</div>
-            ${i.variant ? `<div class="cart-item-variant">${i.variant}</div>` : ''}
-            <div class="cart-item-price">$${i.price.toFixed(2)} each</div>
-            <div class="qty-control">
-              <button class="qty-btn" onclick="changeQty('${i.id.replace(/'/g, "\\'")}', -1)">−</button>
-              <span class="qty-num">${i.qty}</span>
-              <button class="qty-btn" onclick="changeQty('${i.id.replace(/'/g, "\\'")}', 1)">+</button>
-            </div>
-          </div>
-          <button class="cart-item-remove" onclick="removeItem('${i.id.replace(/'/g, "\\'")}')" aria-label="Remove">🗑️</button>
-        </div>
-      `).join('');
-      checkoutBtn.disabled = false;
-    }
-
-    const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-    document.getElementById('cartSubtotal').textContent = '$' + subtotal.toFixed(2);
-    document.getElementById('cartTotal').textContent = '$' + subtotal.toFixed(2);
-  }
-
-  function flashCartButton() {
-    const btn = document.querySelector('.nav-cart');
-    btn.style.transition = 'transform 0.15s';
-    btn.style.transform = 'scale(1.15)';
-    setTimeout(() => { btn.style.transform = 'scale(1)'; }, 150);
-  }
-
-  // ── CART DRAWER OPEN/CLOSE ──
-  function openCart() {
-    renderCart();
-    document.getElementById('cartOverlay').classList.add('open');
-    document.getElementById('cartDrawer').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeCart() {
-    document.getElementById('cartOverlay').classList.remove('open');
-    document.getElementById('cartDrawer').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  // ── CHECKOUT → OUT OF STOCK ──
-  function checkout() {
-    if (cart.length === 0) return;
-    closeCart();
-    setTimeout(openOos, 300);
-  }
-  function openOos() {
-    document.getElementById('oosOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeOos() {
-    document.getElementById('oosOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  // Close OOS modal when clicking the dimmed backdrop
-  document.getElementById('oosOverlay').addEventListener('click', function(e) {
-    if (e.target === this) closeOos();
-  });
-  // Esc closes whatever is open
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      if (document.getElementById('oosOverlay').classList.contains('open')) closeOos();
-      else if (document.getElementById('cartDrawer').classList.contains('open')) closeCart();
-    }
-  });
 
   // ── COUNTER ANIMATION ──
   function animateCounter(el, target, suffix='', duration=1800) {
@@ -2205,11 +1744,10 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        animateCounter(document.getElementById('stat1'), 2847293);
-        animateCounter(document.getElementById('stat2'), 0.5, '');
-        document.getElementById('stat2').textContent = '0.5';
+        animateCounter(document.getElementById('stat1'), 47);
+        animateCounter(document.getElementById('stat2'), 312);
         animateCounter(document.getElementById('stat3'), 0, '%');
-        animateCounter(document.getElementById('stat4'), 17);
+        animateCounter(document.getElementById('stat4'), 7);
         observer.disconnect();
       }
     });
@@ -2236,7 +1774,7 @@
     if (!wasOpen) item.classList.add('open');
   }
 
-  // ── PROMO CODE ──
+  // ── PROMO CODE COPY ──
   function copyCode() {
     navigator.clipboard.writeText('GOODBOY20').catch(() => {});
     const toast = document.getElementById('copyToast');
@@ -2251,17 +1789,9 @@
       alert("Please enter a valid email. Nami needs someone to write to.");
       return;
     }
-    alert(`Thank you for subscribing, ${email}! Nami has been informed. She wagged her tail. We're choosing to interpret that as enthusiasm.`);
+    alert(`Thank you! We've got ${email} on the list. Nami has been informed. She wagged her tail. We're choosing to interpret that as enthusiasm.`);
     document.getElementById('emailInput').value = '';
   }
-  function scrollToProducts(e) {
-    e.preventDefault();
-    const target = document.getElementById('products');
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  // initial render
-  renderCart();
 </script>
 </body>
 </html>
